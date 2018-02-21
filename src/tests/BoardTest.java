@@ -1,5 +1,6 @@
-import static org.junit.Assert.*;
+package tests;
 
+import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class BoardTest {

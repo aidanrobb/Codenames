@@ -33,10 +33,11 @@ public class Board {
 	 */
 	public boolean locationIsValid(String codeName) {
 		int idx = 0;
-//		String team = ManageTurns.getPlayer();
+		String team = "";
 		if(board.contains(codeName)) {
 			idx = board.indexOf(codeName);
 			locationStatus.set(idx, true);
+			
 		}
 		return false;
 	}

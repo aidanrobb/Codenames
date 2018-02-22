@@ -12,6 +12,5 @@ public class BoardTest {
 		Board b = new Board();
 		assertEquals(9,b.getRedCount());
 		assertEquals(8,b.getBlueCount());
-		fail("Not yet implemented");
 	}
 }

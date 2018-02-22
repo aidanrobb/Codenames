@@ -37,7 +37,6 @@ public class Board {
 		if(board.contains(codeName)) {
 			idx = board.indexOf(codeName);
 			locationStatus.set(idx, true);
-			
 		}
 		return false;
 	}

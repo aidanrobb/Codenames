@@ -47,4 +47,9 @@ public class Board {
 	public int getBlueCount() {
 		return blueCount;
 	}
+	
+	
+	// Please tell me you can read this... -Justin
+	
+	
 }

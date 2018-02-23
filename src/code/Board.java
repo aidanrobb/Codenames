@@ -49,7 +49,6 @@ public class Board {
 	}
 	
 	
-	// Please tell me you can read this... -Justin
 	
 	
 }

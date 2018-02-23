@@ -33,7 +33,6 @@ public class Board {
 	 */
 	public boolean locationIsValid(String codeName) {
 		int idx = 0;
-		String team = "";
 		if(board.contains(codeName)) {
 			idx = board.indexOf(codeName);
 			locationStatus.set(idx, true);

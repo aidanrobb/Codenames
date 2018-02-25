@@ -18,7 +18,8 @@ public class BoardTest {
 	public void testLocationIsValid() {
 		Board b = new Board();
 		_location.add(l1);
-//		boolean 
-//		assertTrue(b.locationIsValid())
+		
+		
+		
 	}
 }

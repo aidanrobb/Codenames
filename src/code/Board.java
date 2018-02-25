@@ -6,7 +6,7 @@ import java.util.Collections;
 
 public class Board {
 
-	ManageTurns m = new ManageTurns();
+	private ManageTurns m = new ManageTurns();
 	/**
 	 * ArrayList of 25 Location instances
 	 */
@@ -60,6 +60,9 @@ public class Board {
 		return blueCount;
 	}
 	
+	public ArrayList<Location> getBoard() {
+		return board;
+	}
 	
 	
 	

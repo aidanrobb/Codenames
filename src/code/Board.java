@@ -1,8 +1,13 @@
-package code;
+package src.code;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import src.code.ManageTurns;
+import src.code.Location;
 
 public class Board {
 
@@ -28,6 +33,27 @@ public class Board {
 	 * @param codename
 	 * @return True if Location contained the current team's Agent, false otherwise.
 	 */
+	public ArrayList<String> readFile(String filename) {
+		ArrayList<String> allNames = new ArrayList<String> ();
+		ArrayList<String> top25 = new ArrayList<String>();
+		try{
+            for(String line : Files.readAllLines(Paths.get(filename))){
+                allNames.add(line);
+            }
+        }catch(IOException e){
+            e.printStackTrace();
+        }
+		Collections.shuffle(allNames);
+		for (int i = 0; i < 25; i++) {
+			top25.add(allNames.get(i));
+		}
+		return top25;
+	}
+
+	public ArrayList<Location> boardLocations(ArrayList<String> names) {
+		
+		return this.board;
+	}
 	public boolean locationIsValid(String codeName) {
 		Location idx;
 		int player = m.getPlayer();
@@ -63,7 +89,5 @@ public class Board {
 	public ArrayList<Location> getBoard() {
 		return board;
 	}
-	
-	
 	
 }

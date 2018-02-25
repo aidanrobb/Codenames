@@ -1,8 +1,13 @@
-package code;
+package src.code;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import src.code.ManageTurns;
+import src.code.Location;
 
 public class Board {
 
@@ -44,7 +49,11 @@ public class Board {
 		}
 		return top25;
 	}
-	
+
+	public ArrayList<Location> boardLocations(ArrayList<String> names) {
+		
+		return this.board;
+	}
 	public boolean locationIsValid(String codeName) {
 		Location idx;
 		int player = m.getPlayer();

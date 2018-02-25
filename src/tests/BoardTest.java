@@ -1,4 +1,4 @@
-package tests;
+package src.tests;
 
 import static org.junit.Assert.*;
 
@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import code.Board;
-import code.Location;
+import src.code.Board;
+import src.code.Location;
 
 public class BoardTest {
 

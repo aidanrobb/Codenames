@@ -6,23 +6,20 @@ import java.util.Collections;
 
 public class Board {
 
-	//Still Need to initialize these arrays (Joy) -- judy 
-	//Collections.shuffle(List)
+	ManageTurns m = new ManageTurns();
 	/**
-	 * ArrayList of all the ranks of the locations. ETC: red, blue, bystander, assassin.
+	 * ArrayList of 25 Location instances
 	 */
-	private ArrayList<String> rank = new ArrayList<>(Arrays.asList("red", "red", "red", "red", "red", "red", "red", "red", "red", "blue", "blue", "blue","blue", "blue", "blue", "blue", "blue", "bystander", "bystander", "bystander", "bystander", "bystander", "bystander", "bystander", "assassin"));
+	private ArrayList<Location> board = new ArrayList<>();
 	/**
-	 * ArrayList of 25 random code names.
+	 * The amount of agents left on the board;
 	 */
-	private ArrayList<String> board;
-
-	/**
-	 * ArrayList of whether the code names at the same index are revealed or not.At the start of the game all locations are NOT REVEALED. 
-	 */
-	private ArrayList<Boolean> locationStatus;
-	
+	//Needs to be instantiated in the constructor to 9
 	private int redCount;
+	/**
+	 *The amount of blue agents left on the board. 
+	 */
+	//needs to be instantiated in the constructor to 8
 	private int blueCount;
 	/**
 	 * Updates a Location when the Location's code name was selected, returns if the Location contained the current team's Agent and
@@ -32,12 +29,27 @@ public class Board {
 	 * @return True if Location contained the current team's Agent, false otherwise.
 	 */
 	public boolean locationIsValid(String codeName) {
-		int idx = 0;
-		if(board.contains(codeName)) {
-			idx = board.indexOf(codeName);
-			locationStatus.set(idx, true);
+		Location idx;
+		int player = m.getPlayer();
+		boolean correctTeam = false;
+		for(int i = 0; i < board.size(); i++) {
+			idx = board.get(i);
+			if(idx.getCodename().equals(codeName)) {
+				idx.setRevealed(true);
+				if(idx.getPerson() == 0 && player == 0) {
+					correctTeam = true;
+					redCount--;
+				}
+				if(idx.getPerson() == 1 && player == 1) {
+					correctTeam = true;
+					blueCount--;
+				}
+				else {
+					correctTeam = false;
+				}
+			}
 		}
-		return false;
+		return correctTeam;
 	}
 	
 	public int getRedCount() {

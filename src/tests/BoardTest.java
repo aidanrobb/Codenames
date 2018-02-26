@@ -20,10 +20,10 @@ public class BoardTest {
 	public void first() {
 		b = new Board();
 		_location = new ArrayList<>();
-		b.setBoard(_location);
+//		b.setBoard(_location);
 		m = new ManageTurns();
-		Location l1 = new Location("apple", 0, true);
-		Location l2 = new Location("cat", 1, false);
+		Location l1 = new Location("apple", 1, true);
+		Location l2 = new Location("cat", 0, false);
 		Location l3 = new Location("battery", 2, false);
 		_location.add(l1);
 		_location.add(l2);
@@ -33,8 +33,9 @@ public class BoardTest {
 	@Test
 	public void testLocationIsValid() {
 		m.setPlayer(1);
-		assertFalse(b.locationIsValid(_location.get(0).getCodename()));
-		assertTrue(b.locationIsValid(_location.get(1).getCodename()));
+		b.setBoard(_location);
+//		assertFalse(b.locationIsValid(_location.get(0), _location.get(0).getCodename()));
+		assertTrue(b.locationIsValid(_location.get(1), _location.get(1).getCodename()));
 	}
 	
 }

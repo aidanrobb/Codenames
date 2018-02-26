@@ -56,29 +56,52 @@ public class Board {
 	 * @param codename
 	 * @return True if Location contained the current team's Agent, false otherwise.
 	 */
-	public boolean locationIsValid(String codeName) {
-		Location idx;
+	public boolean locationIsValid(Location loc, String codename) {
 		int player = m.getPlayer();
-		boolean correctTeam = true;;
-		for(int i = 0; i < board.size(); i++) {
-			idx = board.get(i);
-			if(idx.getCodename().equals(codeName)) {
-				idx.setRevealed(true);
-				if(idx.getPerson() == 0) {
-					redCount --;
-				}
-				else if(idx.getPerson()==1) {
-					blueCount --;
-				}
+		boolean correctTeam = false;
+		if(loc.getCodename().equals(codename)) {
+			if(loc.getRevealed() == false) {
+				loc.setRevealed(true);
 			}
-			if(idx.getRevealed() == true ) {
-				correctTeam = false;
+			if(loc.getPerson() == 0) {
+				redCount--;
 			}
-			else if(idx.getPerson() == player) {
+			if(loc.getPerson() == 1) {
+				blueCount--;
+			}
+			if(loc.getPerson() == player) {
 				correctTeam = true;
 			}
+			else correctTeam = false;
 		}
+		
 		return correctTeam;
+//		Location idx;
+//		int player = m.getPlayer();
+//		System.out.println(player);
+//		boolean correctTeam = false;
+//		for(int i = 0; i < board.size(); i++) {
+//			idx = board.get(i);
+//			if(idx.getRevealed() == true ) {
+//				correctTeam =  false;
+//				
+//			}
+//			else if(idx.getPerson() == player) {
+//				correctTeam = true;
+//				
+//			}
+//			if(idx.getCodename().equals(codeName)) {
+//				idx.setRevealed(true);
+//				if(idx.getPerson() == 0) {
+//					redCount --;
+//				}
+//				else if(idx.getPerson()==1) {
+//					blueCount --;
+//				}
+//			}
+//		}
+//		System.out.println(correctTeam);
+//		return correctTeam;
 	}
 	
 	public int getRedCount() {

@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 
-import src.code.Board;
-import src.code.Location;
+import code.Board;
+import code.Location;
 
 public class BoardTest {
 	private ArrayList<Location> _location;

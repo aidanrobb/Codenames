@@ -1,4 +1,4 @@
-package src.code;
+package code;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -6,8 +6,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import src.code.ManageTurns;
-import src.code.Location;
+import code.ManageTurns;
+import code.Location;
 
 public class Board {
 

@@ -59,13 +59,10 @@ public class Board {
 	public boolean locationIsValid(String codeName) {
 		Location idx;
 		int player = m.getPlayer();
-		boolean correctTeam = false;
+		boolean correctTeam = true;;
 		for(int i = 0; i < board.size(); i++) {
 			idx = board.get(i);
-			if(idx.getRevealed()) {
-				return false;
-			}
-			else if(idx.getCodename().equals(codeName)) {
+			if(idx.getCodename().equals(codeName)) {
 				idx.setRevealed(true);
 				if(idx.getPerson() == 0) {
 					redCount --;
@@ -73,6 +70,12 @@ public class Board {
 				else if(idx.getPerson()==1) {
 					blueCount --;
 				}
+			}
+			if(idx.getRevealed() == true ) {
+				correctTeam = false;
+			}
+			else if(idx.getPerson() == player) {
+				correctTeam = true;
 			}
 		}
 		return correctTeam;
@@ -88,6 +91,9 @@ public class Board {
 	
 	public ArrayList<Location> getBoard() {
 		return board;
+	}
+	public void setBoard(ArrayList<Location> loc) {
+		board = loc;
 	}
 	
 }

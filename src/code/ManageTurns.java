@@ -42,4 +42,8 @@ public class ManageTurns {
 		return currentPlayer;
 	}
 	
+	public void setPlayer(int player) {
+		currentPlayer = player;
+	}
+	
 }

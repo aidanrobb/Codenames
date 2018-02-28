@@ -76,32 +76,6 @@ public class Board {
 		}
 		
 		return correctTeam;
-//		Location idx;
-//		int player = m.getPlayer();
-//		System.out.println(player);
-//		boolean correctTeam = false;
-//		for(int i = 0; i < board.size(); i++) {
-//			idx = board.get(i);
-//			if(idx.getRevealed() == true ) {
-//				correctTeam =  false;
-//				
-//			}
-//			else if(idx.getPerson() == player) {
-//				correctTeam = true;
-//				
-//			}
-//			if(idx.getCodename().equals(codeName)) {
-//				idx.setRevealed(true);
-//				if(idx.getPerson() == 0) {
-//					redCount --;
-//				}
-//				else if(idx.getPerson()==1) {
-//					blueCount --;
-//				}
-//			}
-//		}
-//		System.out.println(correctTeam);
-//		return correctTeam;
 	}
 	
 	public int getRedCount() {

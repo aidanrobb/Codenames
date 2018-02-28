@@ -4,28 +4,39 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import code.ManageTurns;
 import code.Location;
 
 public class Board {
 
+	/** 
+	 * New ManageTurns instance for this class
+	 */
 	private ManageTurns m = new ManageTurns();
 	/**
 	 * ArrayList of 25 Location instances
 	 */
-	private ArrayList<Location> board = new ArrayList<>();
+	private ArrayList<Location> board;
 	/**
-	 * The amount of agents left on the board;
+	 * The amount of red agents left on the board;
 	 */
-	//Needs to be instantiated in the constructor to 9
+	
 	private int redCount;
 	/**
 	 *The amount of blue agents left on the board. 
 	 */
-	//needs to be instantiated in the constructor to 8
+
 	private int blueCount;
+	/**
+	 * Constructor that initializes redCount and blueCount. 
+	 * Instantiates the board ArrayList
+	 */
+	public Board() {
+		redCount = 9;
+		blueCount = 8;
+		board = new ArrayList<Location>();
+	}
 	
 	public ArrayList<String> readFile(String filename) {
 		ArrayList<String> allNames = new ArrayList<String> ();
@@ -77,11 +88,15 @@ public class Board {
 		
 		return correctTeam;
 	}
-	
+	/**
+	 * @return Returns the amount of red agents left on the board
+	 */
 	public int getRedCount() {
 		return redCount;
 	}
-	
+	/**
+	 * @return Returns the amount of blue agents left on the board
+	 */
 	public int getBlueCount() {
 		return blueCount;
 	}

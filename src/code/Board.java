@@ -108,4 +108,26 @@ public class Board {
 		board = loc;
 	}
 	
+	/**
+	 * Tests to see if the sting is a codename, and whether it is revealed or not
+	 *
+	 * @param clue String which we are testing to see the legality of
+	 * @return Whether a clue is true (legal) or false (illegal)
+	 */
+	
+	public boolean goodClue(String clue) {
+		for (int i = 0; i< board.size() ;i++) {
+			String player = board.get(i).getCodename();	
+			boolean revealed = board.get(i).getRevealed();
+			if(clue.equals(player) ){
+				if(revealed == true){
+					return true;
+				}
+				else {
+					return false;
+				}
+			}		
+		 }	
+	return false;
+	}
 }

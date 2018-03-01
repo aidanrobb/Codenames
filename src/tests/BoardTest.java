@@ -55,4 +55,15 @@ public class BoardTest {
 		assertEquals("Method should decrease count only if location is Red",8, redCount);
 	}
 	
+	@Test
+	public void testGoodClue1() {
+		boolean ans1 = b.goodClue(_location.get(0).getCodename());
+		assertTrue(ans1 == true);
+	}
+	
+	@Test
+	public void testGoodClue2() {
+		boolean ans2 = b.goodClue(_location.get(1).getCodename());
+		assertTrue(ans2 == false);
+	}
 }

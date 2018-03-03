@@ -100,10 +100,24 @@ public class Board {
 	public int getBlueCount() {
 		return blueCount;
 	}
-	
+	/**
+	 * set redCount
+	 * @param count
+	 */
+	public void setRedCount(int count) {
+		redCount = count;
+	}
+	/**
+	 * Set blueCount
+	 * @param count
+	 */
+	public void setBlueCount(int count) {
+		blueCount = count;
+	}
 	public ArrayList<Location> getBoard() {
 		return board;
 	}
+	
 	public void setBoard(ArrayList<Location> loc) {
 		board = loc;
 	}

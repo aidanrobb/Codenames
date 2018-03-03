@@ -130,4 +130,18 @@ public class Board {
 		 }	
 	return false;
 	}
+	
+	/**
+	   * Determines if all red or all blue is found
+	   *
+	   * @param none
+	   * @return A Boolean stating whether all the red or blue have been found
+	   */
+	public boolean winningState() {
+		if (redCount <= 0 || blueCount <= 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

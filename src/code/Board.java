@@ -13,7 +13,7 @@ public class Board {
 	/** 
 	 * New ManageTurns instance for this class
 	 */
-	private ManageTurns m = new ManageTurns();
+	private ManageTurns m;
 	/**
 	 * ArrayList of 25 Location instances
 	 */
@@ -36,6 +36,7 @@ public class Board {
 		redCount = 9;
 		blueCount = 8;
 		board = new ArrayList<Location>();
+		m = new ManageTurns();
 	}
 	
 	public ArrayList<String> readFile(String filename) {

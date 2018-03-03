@@ -67,19 +67,19 @@ public class BoardTest {
 		assertTrue(ans2 == false);
 	}
 	
-//	@Test
-//	public void blueWin() {
-//		Board redWins = new Board();
-//		redWins.setRedCount(0);
-//		redWins.setBlueCount(4);
-//		assertTrue(redWins.winningState());
-//		Board blueWins = new Board();
-//		blueWins.setRedCount(3);
-//		blueWins.setBlueCount(0);
-//		AssertTrue(blueWins.winningState());
-//		Board notOver = new Board();
-//		notOver.setRedCount(2);
-//		notOver.setBlueCount(6);
-//		assertFalse(notOver.winningState());
-//	}
+	@Test
+	public void blueWin() {
+		Board redWins = new Board();
+		redWins.setRedCount(0);
+		redWins.setBlueCount(4);
+		assertTrue(redWins.winningState());
+		Board blueWins = new Board();
+		blueWins.setRedCount(3);
+		blueWins.setBlueCount(0);
+		assertTrue(blueWins.winningState());
+		Board notOver = new Board();
+		notOver.setRedCount(2);
+		notOver.setBlueCount(6);
+		assertFalse(notOver.winningState());
+	}
 }

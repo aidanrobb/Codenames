@@ -1,5 +1,7 @@
 package code;
-
+/**
+ * @author Judy Mei
+ */
 public class ManageTurns {
 
 	/**
@@ -41,7 +43,10 @@ public class ManageTurns {
 	public int getPlayer() {
 		return currentPlayer;
 	}
-	
+	/**
+	 * set currentPlayer
+	 * @param player
+	 */
 	public void setPlayer(int player) {
 		currentPlayer = player;
 	}

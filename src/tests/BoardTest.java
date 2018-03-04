@@ -138,4 +138,38 @@ public class BoardTest {
 		assertEquals("There wasn't enough assassins", 1, unofficialAssassCount);
 		assertTrue("There was locations revealed", locHidCount == 25);
 	}
+	@Test
+	public void testAssassin() {
+		Board p = new Board();
+		ManageTurns mt = new ManageTurns();
+		Location l = new Location();
+		l.setPerson(3);
+		mt.setPlayer(0);
+		assertEquals(p.Assassin(l,mt),"Blue Team Wins");
+	
+	}
+	
+	@Test
+	public void testAssassin1() {
+		Board p = new Board();
+		ManageTurns mt = new ManageTurns();
+		Location l = new Location();
+		l.setPerson(3);
+		mt.setPlayer(1);
+		System.out.println(mt.getPlayer());
+		assertEquals(p.Assassin(l,mt),"Red Team Wins");
+	
+		
+	}
+	
+	@Test
+	public void testAssassin2() {
+		Board p = new Board();
+		ManageTurns mt = new ManageTurns();
+		Location l = new Location();
+		l.setPerson(2);
+		mt.setPlayer(0);
+		assertEquals(p.Assassin(l,mt),"");
+	
+	}
 }

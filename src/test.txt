@@ -2,11 +2,11 @@
 
 FUNCTIONALITY							METHOD							TESTCASE(s)
 
-checks to see if a clue 				code.Board.goodClue				tests.BoardTest.testGoodClue1 && 
+checks to see if a clue 				code.Board.goodClue				tests.BoardTest.testGoodClue1 
 is legal or illegal													tests.BoardTest.testGoodClue2
 
-updates the location's color			code.Board.loctionIsValid		test.BoardTest.testLocationIsValid &&
- when revealed by decrementing										test.BoardTest.testDecreaseBlue &&
+updates the location's color			code.Board.loctionIsValid		test.BoardTest.testLocationIsValid
+ when revealed by decrementing										test.BoardTest.testDecreaseBlue
  the color count   													test.BoardTest.testDecreaseRed	
 
 creates a list with all of the 		code.Board.readFile				test.BoardTest.testReadFile
@@ -24,8 +24,8 @@ checks to see if a team has won		code.Board.winningState			test.BoardTest.blueWi
 from uncovering all of the team's 
 code names
 
-checks to see if a team has 			code.Board.Assassin				test.BoardTest.testAssassin1
-revealed	 the assassin and											test.BoardTest.testAssassin2
-ends the game if revealed
+checks to see if a team has 			code.Board.Assassin				test.BoardTest.testAssassin
+revealed	 the assassin and											test.BoardTest.testAssassin1
+ends the game if revealed											test.BoardTest.testAssassin2
 
 

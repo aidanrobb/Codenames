@@ -39,28 +39,6 @@ public class Board {
 		m = new ManageTurns();
 	}
 	
-	public ArrayList<String> readFile(String filename) {
-		ArrayList<String> allNames = new ArrayList<String> ();
-		ArrayList<String> top25 = new ArrayList<String>();
-		try{
-            for(String line : Files.readAllLines(Paths.get(filename))){
-                allNames.add(line);
-            }
-        }catch(IOException e){
-            e.printStackTrace();
-        }
-		Collections.shuffle(allNames);
-		for (int i = 0; i < 25; i++) {
-			top25.add(allNames.get(i));
-		}
-		return top25;
-	}
-
-	public ArrayList<Location> boardLocations(ArrayList<String> names) {
-		
-		return this.board;
-	}
-	
 	/**
 	 * Updates a Location when the Location's code name was selected, returns if the Location contained the current team's Agent and
 	 * decrements the count.
@@ -159,4 +137,52 @@ public class Board {
 			return false;
 		}
 	}
+	
+		public ArrayList<String> readFile(String filename) {
+			ArrayList<String> allNames = new ArrayList<String> ();
+			try{
+	            for(String line : Files.readAllLines(Paths.get(filename))){
+	                allNames.add(line);
+	            }
+	        }catch(IOException e){
+	            e.printStackTrace();
+	        }
+			
+			return allNames;
+		}
+		
+		public ArrayList<String> randomNames(ArrayList<String> allNames) {
+			ArrayList<String> top25 = new ArrayList<>();
+			Collections.shuffle(allNames);
+			for (int i = 0; i < 25; i++) {
+				top25.add(allNames.get(i));
+			}
+			
+			return top25;
+		}
+
+		public ArrayList<Location> boardLocations(ArrayList<String> names) {
+			Location empty;
+			for (int i = 0; i < names.size(); i++) {
+				empty = new Location();
+				this.board.add(empty);
+				this.board.get(i).setCodename(names.get(i));
+				this.board.get(i).setRevealed(false);
+			}
+			Collections.shuffle(this.board);
+			this.board.get(24).setPerson(3);
+			for(int i = 0; i < 9; i++) {
+				this.board.get(i).setPerson(0);
+			}
+			for (int i = 9; i < 17; i++) {
+				this.board.get(i).setPerson(1);
+			}
+			for (int i = 17; i < 24; i++) {
+				this.board.get(i).setPerson(2);
+			}
+			
+			Collections.shuffle(this.board);
+
+			return this.board;
+		}
 }

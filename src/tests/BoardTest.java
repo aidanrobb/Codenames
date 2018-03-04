@@ -27,18 +27,20 @@ public class BoardTest {
 		_location.add(l1);
 		_location.add(l2);
 		_location.add(l3);
-		b.setBoard(_location);
+//		b.setBoard(_location);
 	}
 
 	@Test
 	public void testLocationIsValid() {
 		m.setPlayer(1);
+		b.setBoard(_location);
 //		assertFalse(b.locationIsValid(_location.get(0), _location.get(0).getCodename()));
 		assertTrue(b.locationIsValid(_location.get(1), _location.get(1).getCodename()));
 	}
 	
 	@Test
 	public void testDecreaseBlue() {
+		b.setBoard(_location);
 		b.locationIsValid(_location.get(0), _location.get(0).getCodename());
 		int blueCount = b.getBlueCount();
 		int redCount = b.getRedCount();
@@ -48,6 +50,7 @@ public class BoardTest {
 	
 	@Test
 	public void testDecreaseRed() {
+		b.setBoard(_location);
 		b.locationIsValid(_location.get(1), _location.get(1).getCodename());
 		int blueCount = b.getBlueCount();
 		int redCount = b.getRedCount();
@@ -57,12 +60,14 @@ public class BoardTest {
 	
 	@Test
 	public void testGoodClue1() {
+		b.setBoard(_location);
 		boolean ans1 = b.goodClue(_location.get(0).getCodename());
 		assertTrue(ans1 == true);
 	}
 	
 	@Test
 	public void testGoodClue2() {
+		b.setBoard(_location);
 		boolean ans2 = b.goodClue(_location.get(1).getCodename());
 		assertTrue(ans2 == false);
 	}
@@ -81,5 +86,56 @@ public class BoardTest {
 		notOver.setRedCount(2);
 		notOver.setBlueCount(6);
 		assertFalse(notOver.winningState());
+	}
+	
+	@Test
+	public void testReadFile() {
+		Board bob = new Board();
+		ArrayList<String> names = bob.readFile("GameWords.txt");
+		assertEquals("The size of the array wasn't correct", 400, names.size());
+	}
+	
+	@Test
+	public void testRandomNames() {
+		Board bob = new Board();
+		ArrayList<String> allNames = bob.readFile("GameWords.txt");
+		ArrayList<String> names = bob.randomNames(allNames);
+		assertEquals("The size of the array wasn't correct", 25, names.size());
+	}
+	
+	@Test
+	public void testAssignment() {
+		Board bob = new Board();
+		ArrayList<String> allNames = bob.readFile("GameWords.txt");
+		ArrayList<String> names = bob.randomNames(allNames);
+		ArrayList<Location> full = bob.boardLocations(names);
+		int unofficialRedCount = 0;
+		int unofficialBlueCount = 0;
+		int unofficialCivCount = 0;
+		int unofficialAssassCount = 0;
+		int locHidCount = 0;
+		assertEquals("The size of the array wasn't correct", 25, full.size());
+		for (int i = 0; i < full.size(); i++) {
+			if (full.get(i).getPerson() == 0) {
+				unofficialRedCount= unofficialRedCount +1;
+			}
+			if (full.get(i).getPerson() == 1) {
+				unofficialBlueCount = unofficialBlueCount + 1;
+			}
+			if (full.get(i).getPerson() == 2) {
+				unofficialCivCount = unofficialCivCount + 1;
+			}
+			if (full.get(i).getPerson() == 3) {
+				unofficialAssassCount = unofficialAssassCount + 1;
+			}
+			if (full.get(i).getRevealed() == false) {
+				locHidCount = locHidCount + 1;
+			}
+		}
+		assertEquals("There wasn't enough red agents", 9, unofficialRedCount);
+		assertEquals("There wasn't enough blue agents", 8, unofficialBlueCount);
+		assertEquals("There wasn't enough civilians", 7, unofficialCivCount);
+		assertEquals("There wasn't enough assassins", 1, unofficialAssassCount);
+		assertTrue("There was locations revealed", locHidCount == 25);
 	}
 }

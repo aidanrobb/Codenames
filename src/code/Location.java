@@ -59,7 +59,7 @@ public class Location {
 	 * @param p
 	 */
 	public void setPerson(int p) {
-		_person = p;
+		this._person = p;
 	}
 	
 	/**

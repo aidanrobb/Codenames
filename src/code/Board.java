@@ -21,7 +21,7 @@ public class Board {
 	/**
 	 * The amount of red agents left on the board;
 	 */
-	
+
 	private int redCount;
 	/**
 	 *The amount of blue agents left on the board. 
@@ -38,14 +38,14 @@ public class Board {
 		board = new ArrayList<Location>();
 		m = new ManageTurns();
 	}
-	
+
 	/**
 	 * Initializes the board at the start of the game. 
 	 */
 	public void startGame() {
 		Board b = new Board();
 		b.boardLocations(b.randomNames(b.readFile("GameWords.txt")));
-		
+
 	}
 	/**
 	 * Updates a Location when the Location's code name was selected, returns if the Location contained the current team's Agent and
@@ -72,7 +72,7 @@ public class Board {
 			}
 			else correctTeam = false;
 		}
-		
+
 		return correctTeam;
 	}
 	/**
@@ -104,18 +104,18 @@ public class Board {
 	public ArrayList<Location> getBoard() {
 		return board;
 	}
-	
+
 	public void setBoard(ArrayList<Location> loc) {
 		board = loc;
 	}
-	
+
 	/**
 	 * Tests to see if the sting is a codename, and whether it is revealed or not
 	 *
 	 * @param clue String which we are testing to see the legality of
 	 * @return Whether a clue is true (legal) or false (illegal)
 	 */
-	
+
 	public boolean goodClue(String clue) {
 		for (int i = 0; i< board.size() ;i++) {
 			String player = board.get(i).getCodename();	
@@ -128,16 +128,16 @@ public class Board {
 					return false;
 				}
 			}		
-		 }	
-	return false;
+		}	
+		return false;
 	}
-	
+
 	/**
-	   * Determines if all red or all blue is found
-	   *
-	   * @param none
-	   * @return A Boolean stating whether all the red or blue have been found
-	   */
+	 * Determines if all red or all blue is found
+	 *
+	 * @param none
+	 * @return A Boolean stating whether all the red or blue have been found
+	 */
 	public boolean winningState() {
 		if (redCount <= 0 || blueCount <= 0) {
 			return true;
@@ -145,65 +145,87 @@ public class Board {
 			return false;
 		}
 	}
-	
-		public ArrayList<String> readFile(String filename) {
-			ArrayList<String> allNames = new ArrayList<String> ();
-			try{
-	            for(String line : Files.readAllLines(Paths.get(filename))){
-	                allNames.add(line);
-	            }
-	        }catch(IOException e){
-	            e.printStackTrace();
-	        }
-			
-			return allNames;
-		}
-		
-		public ArrayList<String> randomNames(ArrayList<String> allNames) {
-			ArrayList<String> top25 = new ArrayList<>();
-			Collections.shuffle(allNames);
-			for (int i = 0; i < 25; i++) {
-				top25.add(allNames.get(i));
+	/**
+	 * Read over txt file of codenames and convert to arrayList
+	 * @param filename
+	 * @return ArrayList<String> of all the codenames in the file
+	 */
+	public ArrayList<String> readFile(String filename) {
+		ArrayList<String> allNames = new ArrayList<String> ();
+		try{
+			for(String line : Files.readAllLines(Paths.get(filename))){
+				allNames.add(line);
 			}
-			
-			return top25;
+		}catch(IOException e){
+			e.printStackTrace();
 		}
 
-		public ArrayList<Location> boardLocations(ArrayList<String> names) {
-			Location empty;
-			for (int i = 0; i < names.size(); i++) {
-				empty = new Location();
-				this.board.add(empty);
-				this.board.get(i).setCodename(names.get(i));
-				this.board.get(i).setRevealed(false);
-			}
-			Collections.shuffle(this.board);
-			this.board.get(24).setPerson(3);
-			for(int i = 0; i < 9; i++) {
-				this.board.get(i).setPerson(0);
-			}
-			for (int i = 9; i < 17; i++) {
-				this.board.get(i).setPerson(1);
-			}
-			for (int i = 17; i < 24; i++) {
-				this.board.get(i).setPerson(2);
-			}
-			
-			Collections.shuffle(this.board);
+		return allNames;
+	}
 
-			return this.board;
+	/**
+	 * Randomizes the arrayList received from readFile method
+	 * @param ArrayList<String> allNames 
+	 * @return ArrayList<String of 25 codenames
+	 */
+	public ArrayList<String> randomNames(ArrayList<String> allNames) {
+		ArrayList<String> top25 = new ArrayList<>();
+		Collections.shuffle(allNames);
+		for (int i = 0; i < 25; i++) {
+			top25.add(allNames.get(i));
 		}
-		
-		public String Assassin(Location l, ManageTurns m) {
-			
-			if(l.getPerson() == 3) {
-				if(m.getPlayer() == 1) {
-					return "Red Team Wins";
-				}
-				else if(m.getPlayer() == 0){
-						return "Blue Team Wins";
-				}
+
+		return top25;
+	}
+
+	/**
+	 * takes arrayList found from random names and returns a arrayList location
+	 * assigns codenames from name array
+	 * assigns type of person (red, blue, assassin, civ)
+	 * assigns revealed to false
+	 * @param names
+	 * @return ArrayList of 25 location instances. 
+	 */
+	public ArrayList<Location> boardLocations(ArrayList<String> names) {
+		Location empty;
+		for (int i = 0; i < names.size(); i++) {
+			empty = new Location();
+			this.board.add(empty);
+			this.board.get(i).setCodename(names.get(i));
+			this.board.get(i).setRevealed(false);
+		}
+		Collections.shuffle(this.board);
+		this.board.get(24).setPerson(3);
+		for(int i = 0; i < 9; i++) {
+			this.board.get(i).setPerson(0);
+		}
+		for (int i = 9; i < 17; i++) {
+			this.board.get(i).setPerson(1);
+		}
+		for (int i = 17; i < 24; i++) {
+			this.board.get(i).setPerson(2);
+		}
+
+		Collections.shuffle(this.board);
+
+		return this.board;
+	}
+	/**
+	 * Returns which team wins if assassin is chosen. 
+	 * @param Location l
+	 * @param ManageTurns m
+	 * @return String of which team wins
+	 */
+	public String Assassin(Location l, ManageTurns m) {
+
+		if(l.getPerson() == 3) {
+			if(m.getPlayer() == 1) {
+				return "Red Team Wins";
 			}
-			return "";
+			else if(m.getPlayer() == 0){
+				return "Blue Team Wins";
 			}
+		}
+		return "";
+	}
 }

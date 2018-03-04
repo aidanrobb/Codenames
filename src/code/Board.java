@@ -40,6 +40,14 @@ public class Board {
 	}
 	
 	/**
+	 * Initializes the board at the start of the game. 
+	 */
+	public void startGame() {
+		Board b = new Board();
+		b.boardLocations(b.randomNames(b.readFile("GameWords.txt")));
+		
+	}
+	/**
 	 * Updates a Location when the Location's code name was selected, returns if the Location contained the current team's Agent and
 	 * decrements the count.
 	 * 

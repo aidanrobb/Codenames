@@ -217,7 +217,6 @@ public class Board {
 	 * @return String of which team wins
 	 */
 	public String Assassin(Location l, ManageTurns m) {
-
 		if(l.getPerson() == 3) {
 			if(m.getPlayer() == 1) {
 				return "Red Team Wins";

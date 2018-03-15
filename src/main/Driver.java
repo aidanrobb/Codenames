@@ -7,13 +7,14 @@ import javax.swing.SwingUtilities;
 import code.Board;
 import code.Location;
 import code.ManageTurns;
-import gui.GUI;
+//import gui.GUI;
+import gui.SpymasterGui;
 
 public class Driver implements Runnable {
 
 	private Board _board;
 //	private Location _location;
-//	private  ManageTurns _manageTurns;
+//	private ManageTurns _manageTurns;
 	private JFrame _window;
 	private JPanel _mainPanel;
 	
@@ -29,11 +30,11 @@ public class Driver implements Runnable {
 	}
 	@Override
 	public void run() {
-		_window = new JFrame("CodeNames");
+		_window = new JFrame("Start Menu");
 		_mainPanel = new JPanel();
 		_window.getContentPane().add(_mainPanel);
 
-//		new GUI(_model, _mainPanel, this);
+//		new SpymasterGui(_board, _mainPanel, this);
 		
 		_window.setVisible(true);
 		_window.pack();

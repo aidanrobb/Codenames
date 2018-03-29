@@ -7,10 +7,9 @@ import javax.swing.SwingUtilities;
 import code.Board;
 import code.Location;
 import code.ManageTurns;
-//import gui.GUI;
 import gui.SpymasterGui;
 
-public class Driver implements Runnable {
+public class Driver implements Runnable{
 
 	private Board _board;
 //	private Location _location;
@@ -34,7 +33,7 @@ public class Driver implements Runnable {
 		_mainPanel = new JPanel();
 		_window.getContentPane().add(_mainPanel);
 
-//		new SpymasterGui(_board, _mainPanel, this);
+		SpymasterGui a = new SpymasterGui(_board, _mainPanel, this);
 		
 		_window.setVisible(true);
 		_window.pack();
@@ -42,4 +41,8 @@ public class Driver implements Runnable {
 		
 	}
 
+	public void updateJFrame() {
+		_window.pack();
+		_window.repaint();
+	}
 }

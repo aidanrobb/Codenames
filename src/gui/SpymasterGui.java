@@ -6,17 +6,18 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+
 import code.Board;
 
 public class SpymasterGui {
 
 	private Board _board;
-	private Driver _driver;
+	private main.Driver _driver;
 	private JPanel _mainPanel;
 	private JPanel _messagePanel;
 	private JTextArea msg;
 	
-	public SpymasterGui(Board b, JPanel mp, Driver d) {
+	public SpymasterGui(Board b, JPanel mp, main.Driver d) {
 		_driver = d;
 		_board = b;
 		
@@ -24,7 +25,9 @@ public class SpymasterGui {
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.Y_AXIS));
 		
 		_messagePanel = new JPanel();
+		_mainPanel.add(_messagePanel);
 		msg = new JTextArea();
+		_messagePanel.add(msg);
 		msg.setEditable(false);
 		msg.setText("Welcome");
 		//FIX LATER
@@ -34,7 +37,6 @@ public class SpymasterGui {
 		else {
 			msg.setText("Good Clue!");
 		}
-		
-		
+
 	}
 }

@@ -7,7 +7,7 @@ import javax.swing.SwingUtilities;
 import code.Board;
 import code.Location;
 import code.ManageTurns;
-import gui.SpymasterGui;
+import gui.GUI;
 
 public class Driver implements Runnable{
 
@@ -33,7 +33,7 @@ public class Driver implements Runnable{
 		_mainPanel = new JPanel();
 		_window.getContentPane().add(_mainPanel);
 
-		SpymasterGui a = new SpymasterGui(_board, _mainPanel, this);
+		GUI a = new GUI(_board, _mainPanel, this);
 		
 		_window.setVisible(true);
 		_window.pack();

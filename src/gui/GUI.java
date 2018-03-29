@@ -1,23 +1,19 @@
 package gui;
 
-import java.sql.Driver;
-
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-
 import code.Board;
 
-public class SpymasterGui {
-
+public class GUI {
 	private Board _board;
 	private main.Driver _driver;
 	private JPanel _mainPanel;
 	private JPanel _messagePanel;
 	private JTextArea msg;
 	
-	public SpymasterGui(Board b, JPanel mp, main.Driver d) {
+	public GUI(Board b, JPanel mp, main.Driver d) {
 		_driver = d;
 		_board = b;
 		

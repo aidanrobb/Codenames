@@ -81,7 +81,6 @@ public class GUI {
 		_switchPanel.add(playerButton);
 		_mainPanel.add(_switchPanel);
 
-		
 
 	}
 }

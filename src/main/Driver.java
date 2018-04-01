@@ -29,7 +29,7 @@ public class Driver implements Runnable{
 	}
 	@Override
 	public void run() {
-		_window = new JFrame("Start Menu");
+		_window = new JFrame("Code Names");
 		_mainPanel = new JPanel();
 		_window.getContentPane().add(_mainPanel);
 

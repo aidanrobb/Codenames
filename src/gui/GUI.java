@@ -11,6 +11,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import GUIEventHandlers.SwitchTurn;
 
@@ -134,7 +135,13 @@ public class GUI extends JFrame implements ActionListener {
 		
 		// IF BELOW IS UNCOMMENTED, IT BREAKS EVERYTHING!!!
 //		_getUserInput.input();
-
+		JPanel input = new JPanel();
+		_mainPanel.add(input);
+		JTextField box = new JTextField(" Enter Clue");
+		input.add(box);
+		JButton enter = new JButton("Enter");
+		input.add(enter);
+		String answer = box.getText();
 
 	}
 }

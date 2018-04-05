@@ -117,19 +117,25 @@ public class Board {
 	 */
 
 	public boolean goodClue(String clue) {
+		String[] words = clue.trim().split(" ");
+		
+		boolean answer = false;
 		for (int i = 0; i< board.size() ;i++) {
 			String player = board.get(i).getCodename();	
 			boolean revealed = board.get(i).getRevealed();
 			if(clue.equals(player) ){
-				if(revealed == true){
-					return true;
+				answer= false;
+			}
+			else {
+				if(words.length == 1) {
+					answer = true;
 				}
-				else {
-					return false;
+				else if(words.length > 1) {
+					answer = false;
 				}
-			}		
+			}
 		}	
-		return true;
+		return answer;
 	}
 
 	/**

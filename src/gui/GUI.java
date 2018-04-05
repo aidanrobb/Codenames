@@ -18,6 +18,7 @@ import GUIEventHandlers.SwitchTurn;
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -103,12 +104,27 @@ public class GUI extends JFrame implements ActionListener {
 		//scorePanel
 		_scorePanel = new JPanel();
 		_scorePanel.setLayout(new FlowLayout());
-		JTextArea score = new JTextArea("10-9");
+		JLabel score = new JLabel("10-9");
 		_scorePanel.add(score);
-		JTextArea teamColor = new JTextArea("Red Team");
+		JLabel teamColor = new JLabel("Red Team");
 		_scorePanel.add(teamColor);
+		
 		JButton switchTurn = new JButton("Switch Turn");
-		switchTurn.addActionListener(new SwitchTurn(_m));
+//		switchTurn.addActionListener(new SwitchTurn(_m));
+		switchTurn.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				int turn = _m.switchTurn();
+				if(turn == 0) {
+					teamColor.setText("Red Team");
+				}
+				else if(turn == 1){
+					teamColor.setText("Blue Team");
+				}
+			}
+		});
+		
 		_scorePanel.add(switchTurn);
 		_mainPanel.add(_scorePanel);
 		
@@ -126,8 +142,8 @@ public class GUI extends JFrame implements ActionListener {
 		// switchPanel
 		_switchPanel = new JPanel();
 		_switchPanel.setLayout(new BoxLayout(_switchPanel, BoxLayout.X_AXIS));
-		JButton spymasterButton = new JButton("S");
-		JButton playerButton = new JButton("P");
+		JButton spymasterButton = new JButton("Spymaster");
+		JButton playerButton = new JButton("Player");
 		// NEED TO DO ACTIONLISTERS
 		_switchPanel.add(spymasterButton);
 		_switchPanel.add(playerButton);
@@ -135,6 +151,7 @@ public class GUI extends JFrame implements ActionListener {
 		
 		// IF BELOW IS UNCOMMENTED, IT BREAKS EVERYTHING!!!
 //		_getUserInput.input();
+		
 		JPanel input = new JPanel();
 		_mainPanel.add(input);
 		JTextField box = new JTextField(" Enter Clue");
@@ -142,6 +159,26 @@ public class GUI extends JFrame implements ActionListener {
 		JButton enter = new JButton("Enter");
 		input.add(enter);
 		String answer = box.getText();
-
+		
+		enter.addActionListener(new ActionListener(){
+   			public void actionPerformed(ActionEvent e){
+      		String getValue = box.getText();
+      		boolean clue = _board.goodClue(getValue);
+      		if(clue) {
+      			msg.setText("Clue is Valid");
+      		}
+      		else{
+      			msg.setText("Clue is invalid");
+      		}
+			
+   		   }
+		});
+		
+		JTextField count = new JTextField(" Enter Count");
+		input.add(count);
+		JButton enter2 = new JButton("Enter Count");
+		input.add(enter2);
+		String countAnswer = box.getText();
 	}
+	
 }

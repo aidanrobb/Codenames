@@ -3,7 +3,10 @@ package GUIEventHandlers;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JTextArea;
+
 import code.ManageTurns;
+import gui.GUI;
 
 
 // This might be a disaster

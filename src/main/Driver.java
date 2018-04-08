@@ -32,7 +32,7 @@ public class Driver implements Runnable{
 		_window = new JFrame("Code Names");
 		_mainPanel = new JPanel();
 		_window.getContentPane().add(_mainPanel);
-		_board.startGame();
+		
 		GUI a = new GUI(_board, _mainPanel, this);
 		
 		_window.setVisible(true);

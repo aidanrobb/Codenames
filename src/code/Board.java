@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import code.ManageTurns;
+import gui.GUI;
 import code.Location;
 
 public class Board {
@@ -43,10 +44,11 @@ public class Board {
 	 * Initializes the board at the start of the game. 
 	 */
 	public void startGame() {
-		Board b = new Board();
-		b.boardLocations(b.randomNames(b.readFile("GameWords.txt")));
-
+//		Board b = new Board();
+//		b.boardLocations(b.randomNames(b.readFile("GameWords.txt")));
+		boardLocations(randomNames(readFile("GameWords.txt")));
 	}
+	
 	/**
 	 * Updates a Location when the Location's code name was selected, returns if the Location contained the current team's Agent and
 	 * decrements the count.
@@ -110,7 +112,7 @@ public class Board {
 	}
 
 	/**
-	 * Tests to see if the sting is a codename, and whether it is revealed or not
+	 * Tests to see if the string is a codename, and whether it is revealed or not
 	 *
 	 * @param clue String which we are testing to see the legality of
 	 * @return Whether a clue is true (legal) or false (illegal)
@@ -118,16 +120,15 @@ public class Board {
 
 	public boolean goodClue(String clue) {
 		String[] words = clue.trim().split(" ");
-		
-		boolean answer = false;
+		boolean answer = true;
 		for (int i = 0; i< board.size() ;i++) {
 			String player = board.get(i).getCodename();	
-			boolean revealed = board.get(i).getRevealed();
+//			boolean revealed = board.get(i).getRevealed();
 			if(clue.equals(player) ){
-				answer= false;
+				answer = false;
 			}
 			else {
-				if(words.length == 1) {
+				if(words.length == 1){
 					answer = true;
 				}
 				else if(words.length > 1) {
@@ -137,6 +138,23 @@ public class Board {
 		}	
 		return answer;
 	}
+	/*
+	 * public boolean goodClue(String clue) {
+ +		for (int i = 0; i< board.size() ;i++) {
+ +			String player = board.get(i).getCodename();	
+ +			boolean revealed = board.get(i).getRevealed();
+ +			if(clue.equals(player) ){
+ +				if(revealed == true){
+ +					return true;
+ +				}
+ +				else {
+ +					return false;
+ +				}
+ +			}		
+ +		 }	
+ +	return false;
+ +	}
+	 */
 
 	/**
 	 * Determines if all red or all blue is found

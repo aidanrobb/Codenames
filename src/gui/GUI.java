@@ -41,7 +41,11 @@ public class GUI extends JFrame implements ActionListener {
 	private JPanel _filePanel;
 	private GetUserInput _getUserInput;
 	private boolean spymaster = false;
-
+	private String codeName;
+	private JLabel message;
+	
+	
+	
 	// JMenu stuff
 	JMenuBar menuBar;
 	JMenu menu, submenu;
@@ -53,7 +57,10 @@ public class GUI extends JFrame implements ActionListener {
 	public void actionPerformed(ActionEvent ae) { 
 		String choice = ae.getActionCommand(); 
 		if (choice.equals("Start")) {
+			_board = new Board();
 			_board.startGame();
+			update();
+			msg.setText("New Game");
 		}
 		else if (choice.equals("Quit")) { 
 			System.exit(0); 
@@ -92,11 +99,20 @@ public class GUI extends JFrame implements ActionListener {
 		_messagePanel = new JPanel();
 		_mainPanel.add(_messagePanel);
 
-		// message panel 
+		// Spymaster/player message panel 
 		msg = new JLabel();
 		_messagePanel.add(msg);
 		msg.setText("Welcome");
 
+		//clue message 
+		JPanel _clueMsg = new JPanel(); 
+		_mainPanel.add(_clueMsg);
+		
+		message = new JLabel();
+		_clueMsg.add(message);
+		message.setText("Start Game");
+		
+		
 		//scorePanel
 		_scorePanel = new JPanel();
 		_scorePanel.setLayout(new FlowLayout());
@@ -168,7 +184,7 @@ public class GUI extends JFrame implements ActionListener {
 				spymaster = true;
 				update();
 				//IF COMMENTED OUT DOESN'T WORK 
-				msg.setText("Player View");
+				msg.setText("Spymaster View");
 			}
 		});
 
@@ -177,8 +193,7 @@ public class GUI extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e){
 				spymaster = false;
 				update();
-				//IF COMMENTED OUT DOESN'T WORK 
-				msg.setText("Spymaster View");
+				msg.setText("Player View");
 			}
 		});
 	
@@ -202,10 +217,11 @@ public class GUI extends JFrame implements ActionListener {
 				String getValue = box.getText();
 				boolean clue = _board.goodClue(getValue);
 				if(clue) {
-					msg.setText("Clue is Valid");
+					message.setText("Clue is Valid");
+					codeName = getValue;
 				}
 				else{
-					msg.setText("Clue is invalid");
+					message.setText("Clue is invalid");
 				}
 			}
 		});
@@ -241,6 +257,7 @@ public class GUI extends JFrame implements ActionListener {
 			}
 			else if(!spymaster) {
 				cards = new JButton(s.getCodename());
+				message.setText(codeName);
 			}
 			_cardPanel.add(cards);
 //			ADD ACTIONLISTENER

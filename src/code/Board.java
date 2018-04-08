@@ -120,11 +120,14 @@ public class Board {
 
 	public boolean goodClue(String clue) {
 		String[] words = clue.trim().split(" ");
-		boolean answer = true;
+		boolean answer = false;
 		for (int i = 0; i< board.size() ;i++) {
 			String player = board.get(i).getCodename();	
 //			boolean revealed = board.get(i).getRevealed();
-			if(clue.equals(player) ){
+			if(clue.equalsIgnoreCase(player) ){
+				answer = false;
+			}
+			else if(clue == null || clue.equals("")) {
 				answer = false;
 			}
 			else {

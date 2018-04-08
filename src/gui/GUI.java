@@ -219,9 +219,11 @@ public class GUI extends JFrame implements ActionListener {
 				if(clue) {
 					message.setText("Clue is Valid");
 					codeName = getValue;
+					update();
 				}
 				else{
 					message.setText("Clue is invalid");
+					update();
 				}
 			}
 		});

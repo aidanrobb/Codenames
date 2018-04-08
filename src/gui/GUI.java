@@ -232,6 +232,13 @@ public class GUI extends JFrame implements ActionListener {
 		input.add(enter2);
 		String countAnswer = box.getText();
 
+//		updateJFrameIfNotHeadless();
+	}
+	
+	public void updateJFrameIfNotHeadless() {
+		if (_driver != null) {
+			_driver.updateJFrame();
+		}
 	}
 	public void update() {
 		_cardPanel.removeAll();
@@ -261,6 +268,8 @@ public class GUI extends JFrame implements ActionListener {
 			}
 			_cardPanel.add(cards);
 //			ADD ACTIONLISTENER
+			
+			updateJFrameIfNotHeadless();
 		}
 	}
 

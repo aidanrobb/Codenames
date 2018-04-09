@@ -118,46 +118,56 @@ public class Board {
 	 * @return Whether a clue is true (legal) or false (illegal)
 	 */
 
-	public boolean goodClue(String clue) {
-		String[] words = clue.trim().split(" ");
-		boolean answer = false;
-		for (int i = 0; i< board.size() ;i++) {
-			String player = board.get(i).getCodename();	
+//	public boolean goodClue(String clue) {
+//		String[] words = clue.trim().split(" ");
+//		boolean answer = false;
+//		for (int i = 0; i< board.size() ;i++) {
+//			String player = board.get(i).getCodename();	
 //			boolean revealed = board.get(i).getRevealed();
-			if(clue.equalsIgnoreCase(player) ){
-				answer = false;
-			}
-			else if(clue == null || clue.equals("")) {
-				answer = false;
-			}
-			else {
-				if(words.length == 1){
+//			if(clue.equalsIgnoreCase(player) ){
+//				answer = false;
+//			}
+//			else if(clue == null || clue.equals("")) {
+//				answer = false;
+//			}
+//			else {
+//				if(words.length == 1){
+//					answer = true;
+//				}
+//				else if(words.length > 1) {
+//					answer = false;
+//				}
+//			}
+//		}	
+//		return answer;
+//	}
+	public boolean goodClue(String clue) {
+		 String[] words = clue.trim().split(" ");
+		  if(words.length == 1) {
+		  boolean answer = true;
+		  int i = 0;
+			while(answer == true && i < board.size()) {
+				String player = board.get(i).getCodename();	
+				boolean revealed = board.get(i).getRevealed();
+				if(clue.equalsIgnoreCase(player) ){
+					if(revealed == true){
+						answer = true;
+					}
+					else {
+						answer = false;
+					}
+				}	
+				else {
 					answer = true;
 				}
-				else if(words.length > 1) {
-					answer = false;
-				}
-			}
-		}	
+				i= i+1;
+			 }	
 		return answer;
-	}
-	/*
-	 * public boolean goodClue(String clue) {
- +		for (int i = 0; i< board.size() ;i++) {
- +			String player = board.get(i).getCodename();	
- +			boolean revealed = board.get(i).getRevealed();
- +			if(clue.equals(player) ){
- +				if(revealed == true){
- +					return true;
- +				}
- +				else {
- +					return false;
- +				}
- +			}		
- +		 }	
- +	return false;
- +	}
-	 */
+		}
+		  else {
+			  return false;
+		  }
+	  }
 
 	/**
 	 * Determines if all red or all blue is found

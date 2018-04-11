@@ -118,29 +118,7 @@ public class Board {
 	 * @return Whether a clue is true (legal) or false (illegal)
 	 */
 
-//	public boolean goodClue(String clue) {
-//		String[] words = clue.trim().split(" ");
-//		boolean answer = false;
-//		for (int i = 0; i< board.size() ;i++) {
-//			String player = board.get(i).getCodename();	
-//			boolean revealed = board.get(i).getRevealed();
-//			if(clue.equalsIgnoreCase(player) ){
-//				answer = false;
-//			}
-//			else if(clue == null || clue.equals("")) {
-//				answer = false;
-//			}
-//			else {
-//				if(words.length == 1){
-//					answer = true;
-//				}
-//				else if(words.length > 1) {
-//					answer = false;
-//				}
-//			}
-//		}	
-//		return answer;
-//	}
+
 	public boolean goodClue(String clue) {
 		 String[] words = clue.trim().split(" ");
 		  if(words.length == 1) {

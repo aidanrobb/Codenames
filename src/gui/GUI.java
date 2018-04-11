@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
@@ -266,6 +267,36 @@ public class GUI extends JFrame implements ActionListener {
 			}
 			else if(!spymaster) {
 				cards = new JButton(s.getCodename());
+				JButton j = cards;
+				j.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+						if (s.getPerson() == 0) {
+							j.setText("RED");
+							j.setForeground(Color.RED);
+							j.setContentAreaFilled(false);
+							j.setOpaque(true);
+						}
+						else if (s.getPerson() == 1) {
+							j.setText("BLUE");
+							j.setForeground(Color.BLUE);
+							j.setContentAreaFilled(false);
+							j.setOpaque(true);
+						}
+						else if (s.getPerson() == 2) {
+							j.setText("CIVILIAN");
+							j.setForeground(Color.GRAY);
+							j.setContentAreaFilled(false);
+							j.setOpaque(true);
+						}
+						else if (s.getPerson() == 3) {
+							j.setText("ASSASSIN");
+							j.setForeground(Color.MAGENTA);
+							j.setContentAreaFilled(false);
+							j.setOpaque(true);
+//							_board.Assassin(l, m)
+						}
+					}
+				});
 				message.setText(codeName);
 			}
 			_cardPanel.add(cards);

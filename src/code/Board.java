@@ -29,6 +29,12 @@ public class Board {
 	 */
 
 	private int blueCount;
+	
+	/**
+	 *This is an error message 
+	 */
+
+	private String msg;
 	/**
 	 * Constructor that initializes redCount and blueCount. 
 	 * Instantiates the board ArrayList
@@ -90,6 +96,12 @@ public class Board {
 		return blueCount;
 	}
 	/**
+	 * @return message
+	 */
+	public String getMsg() {
+		return msg;
+	}
+	/**
 	 * set redCount
 	 * @param count
 	 */
@@ -120,6 +132,10 @@ public class Board {
 
 
 	public boolean goodClue(String clue) {
+		 if (clue==null||clue.equals("")) {
+			  msg = "Please enter a clue";
+			  return false;
+		  }
 		 String[] words = clue.trim().split(" ");
 		  if(words.length == 1) {
 		  boolean answer = true;
@@ -133,6 +149,7 @@ public class Board {
 					}
 					else {
 						answer = false;
+						msg = "Clue cannot equal codename";
 					}
 				}	
 				else {
@@ -143,6 +160,7 @@ public class Board {
 		return answer;
 		}
 		  else {
+			  msg = "Clue must be one word";
 			  return false;
 		  }
 	  }

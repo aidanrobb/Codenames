@@ -145,35 +145,7 @@ public class GUI extends JFrame implements ActionListener {
 		_cardPanel = new JPanel();
 		_cardPanel.setLayout(new GridLayout(5,5));
 
-		JButton cards;
-//		for(Location s : _board.getBoard()) {
-//			cards = new JButton();
-//			String agent = "";
-//			if(s.getPerson() == 0) {
-//				agent = "RED";
-//			}
-//			else if(s.getPerson() == 1) {
-//				agent = "BLUE";
-//			}
-//			else if(s.getPerson() == 2) {
-//				agent = "CIVILIAN";
-//			}
-//			else if(s.getPerson() == 3) {
-//				agent = "ASSASSIN";
-//			}
-//			if(spymaster) {
-//				cards = new JButton("<html>" + s.getCodename() + "<br/>" + agent + "</html>");
-//				update();
-//				
-//			}
-//			else if(!spymaster) {
-//				cards = new JButton(s.getCodename());
-//				update();
-//			}
-//			update();
-//			_cardPanel.add(cards);
-//			ADD ACTIONLISTENER
-//		}
+
 		_mainPanel.add(_cardPanel);
 
 		// switchPanel
@@ -217,13 +189,23 @@ public class GUI extends JFrame implements ActionListener {
 			public void actionPerformed(ActionEvent e){
 				String getValue = box.getText();
 				boolean clue = _board.goodClue(getValue);
+				if (getValue.equalsIgnoreCase("bobsaget")) {
+					_mainPanel.setBackground(Color.CYAN);
+					_scorePanel.setBackground(Color.CYAN);
+					_messagePanel.setBackground(Color.CYAN);
+					_switchPanel.setBackground(Color.CYAN);
+					_cardPanel.setBackground(Color.CYAN);
+					input.setBackground(Color.CYAN);
+					_clueMsg.setBackground(Color.CYAN);
+				}
+
 				if(clue) {
 					message.setText("Clue is Valid");
 					codeName = getValue;
 					update();
 				}
 				else{
-					message.setText("Clue is invalid");
+					message.setText(_board.getMsg());
 					update();
 				}
 			}

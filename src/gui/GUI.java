@@ -117,7 +117,7 @@ public class GUI extends JFrame implements ActionListener {
 		//scorePanel
 		_scorePanel = new JPanel();
 		_scorePanel.setLayout(new FlowLayout());
-		JLabel score = new JLabel("10-9");
+		JLabel score = new JLabel(_board.getRedCount() + " - " + _board.getBlueCount());
 		_scorePanel.add(score);
 		JLabel teamColor = new JLabel("Red Team");
 		_scorePanel.add(teamColor);
@@ -257,6 +257,8 @@ public class GUI extends JFrame implements ActionListener {
 							j.setForeground(Color.RED);
 							j.setContentAreaFilled(false);
 							j.setOpaque(true);
+							
+							_board.setRedCount(_board.getRedCount()-1);
 						}
 						else if (s.getPerson() == 1) {
 							j.setText("BLUE");
@@ -275,7 +277,7 @@ public class GUI extends JFrame implements ActionListener {
 							j.setForeground(Color.MAGENTA);
 							j.setContentAreaFilled(false);
 							j.setOpaque(true);
-//							_board.Assassin(l, m)
+							message.setText(_board.Assassin(s, _m));
 						}
 					}
 				});

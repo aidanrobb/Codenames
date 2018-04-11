@@ -252,10 +252,10 @@ public class Board {
 	public String Assassin(Location l, ManageTurns m) {
 		if(l.getPerson() == 3) {
 			if(m.getPlayer() == 1) {
-				return "Red Team Wins";
+				return "GAME OVER!!!     Red Team Wins";
 			}
 			else if(m.getPlayer() == 0){
-				return "Blue Team Wins";
+				return "GAME OVER!!!     Blue Team Wins";
 			}
 		}
 		return "";

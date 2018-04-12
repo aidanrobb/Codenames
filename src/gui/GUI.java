@@ -45,7 +45,8 @@ public class GUI extends JFrame implements ActionListener {
 	private String codeName;
 	private JLabel message;
 	private JPanel input;
-	JLabel teamColor = new JLabel();
+	private JLabel teamColor = new JLabel();
+	private JLabel score = new JLabel();
 	
 	
 	// JMenu stuff
@@ -120,7 +121,7 @@ public class GUI extends JFrame implements ActionListener {
 		//scorePanel
 		_scorePanel = new JPanel();
 		_scorePanel.setLayout(new FlowLayout());
-		JLabel score = new JLabel(_board.getRedCount() + " - " + _board.getBlueCount());
+		score = new JLabel(_board.getRedCount() + " - " + _board.getBlueCount());
 		_scorePanel.add(score);
 		teamColor = new JLabel("Red Team");
 		_scorePanel.add(teamColor);
@@ -267,18 +268,20 @@ public class GUI extends JFrame implements ActionListener {
 				JButton j = cards;
 				j.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e){
+						_board.locationIsValid(s);
 						if (s.getPerson() == 0) {
 							j.setText("RED");
 							j.setForeground(Color.RED);
 							j.setContentAreaFilled(false);
 							j.setOpaque(true);
-							
+//							score = new JLabel(_board.getRedCount() + " - " + _board.getBlueCount());
 						}
 						else if (s.getPerson() == 1) {
 							j.setText("BLUE");
 							j.setForeground(Color.BLUE);
 							j.setContentAreaFilled(false);
 							j.setOpaque(true);
+//							score = new JLabel(_board.getRedCount() + " - " + _board.getBlueCount());
 						}
 						else if (s.getPerson() == 2) {
 							j.setText("CIVILIAN");

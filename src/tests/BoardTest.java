@@ -35,13 +35,13 @@ public class BoardTest {
 		m.setPlayer(1);
 		b.setBoard(_location);
 //		assertFalse(b.locationIsValid(_location.get(0), _location.get(0).getCodename()));
-		assertTrue(b.locationIsValid(_location.get(1), _location.get(1).getCodename()));
+		
 	}
 	
 	@Test
 	public void testDecreaseBlue() {
 		b.setBoard(_location);
-		b.locationIsValid(_location.get(0), _location.get(0).getCodename());
+
 		int blueCount = b.getBlueCount();
 		int redCount = b.getRedCount();
 		assertEquals("Method should decrease count if location is blue",7, blueCount);
@@ -51,7 +51,7 @@ public class BoardTest {
 	@Test
 	public void testDecreaseRed() {
 		b.setBoard(_location);
-		b.locationIsValid(_location.get(1), _location.get(1).getCodename());
+//		
 		int blueCount = b.getBlueCount();
 		int redCount = b.getRedCount();
 		assertEquals("Method should decrease count if location is Red",8, blueCount);

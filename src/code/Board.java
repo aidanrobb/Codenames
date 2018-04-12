@@ -63,24 +63,24 @@ public class Board {
 	 * @param codename
 	 * @return True if Location contained the current team's Agent, false otherwise.
 	 */
-	public boolean locationIsValid(Location loc, String codename) {
+	public boolean locationIsValid(Location loc) {
 		int player = m.getPlayer();
 		boolean correctTeam = false;
-		if(loc.getCodename().equals(codename)) {
-			if(loc.getRevealed() == false) {
-				loc.setRevealed(true);
-			}
-			if(loc.getPerson() == 0) {
-				redCount--;
-			}
-			if(loc.getPerson() == 1) {
-				blueCount--;
-			}
-			if(loc.getPerson() == player) {
-				correctTeam = true;
-			}
-			else correctTeam = false;
+
+		if(loc.getRevealed() == false) {
+			loc.setRevealed(true);
 		}
+		if(loc.getPerson() == 0) {
+			redCount--;
+		}
+		if(loc.getPerson() == 1) {
+			blueCount--;
+		}
+		if(loc.getPerson() == player) {
+			correctTeam = true;
+		}
+		else correctTeam = false;
+
 
 		return correctTeam;
 	}

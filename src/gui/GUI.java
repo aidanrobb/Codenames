@@ -44,7 +44,7 @@ public class GUI extends JFrame implements ActionListener {
 	private boolean spymaster = false;
 	private String codeName;
 	private JLabel message;
-	
+	private JPanel input;
 	
 	
 	// JMenu stuff
@@ -70,7 +70,7 @@ public class GUI extends JFrame implements ActionListener {
 
 	public GUI(Board b, JPanel mp, main.Driver d) {
 		super(""); 
-
+		input = new JPanel();
 		_driver = d;
 		_board = b;
 		//		_board.boardLocations(b.randomNames(b.readFile("GameWords.txt")));
@@ -177,7 +177,18 @@ public class GUI extends JFrame implements ActionListener {
 		// IF BELOW IS UNCOMMENTED, IT BREAKS EVERYTHING!!!
 		//		_getUserInput.input();
 
-		JPanel input = new JPanel();
+		
+
+//		updateJFrameIfNotHeadless();
+	}
+	
+	public void updateJFrameIfNotHeadless() {
+		if (_driver != null) {
+			_driver.updateJFrame();
+		}
+	}
+	
+	public void clueStuff() {
 		_mainPanel.add(input);
 		JTextField box = new JTextField(" Enter Clue", 10);
 		input.add(box);
@@ -196,7 +207,7 @@ public class GUI extends JFrame implements ActionListener {
 					_switchPanel.setBackground(Color.CYAN);
 					_cardPanel.setBackground(Color.CYAN);
 					input.setBackground(Color.CYAN);
-					_clueMsg.setBackground(Color.CYAN);
+//					_clueMsg.setBackground(Color.CYAN);
 				}
 
 				if(clue) {
@@ -216,18 +227,16 @@ public class GUI extends JFrame implements ActionListener {
 		JButton enter2 = new JButton("Enter Count");
 		input.add(enter2);
 		String countAnswer = box.getText();
-
-//		updateJFrameIfNotHeadless();
 	}
 	
-	public void updateJFrameIfNotHeadless() {
-		if (_driver != null) {
-			_driver.updateJFrame();
-		}
-	}
+	
 	public void update() {
 		_cardPanel.removeAll();
 		JButton cards;
+		input.removeAll();
+		if (spymaster) {
+			clueStuff();
+		}
 		for(Location s : _board.getBoard()) {
 			cards = new JButton();
 			String agent = "";

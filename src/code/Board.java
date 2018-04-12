@@ -53,6 +53,7 @@ public class Board {
 //		Board b = new Board();
 //		b.boardLocations(b.randomNames(b.readFile("GameWords.txt")));
 		boardLocations(randomNames(readFile("GameWords.txt")));
+//		m.resetPlayer();
 	}
 	
 	/**

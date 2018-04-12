@@ -45,6 +45,7 @@ public class GUI extends JFrame implements ActionListener {
 	private String codeName;
 	private JLabel message;
 	private JPanel input;
+	JLabel teamColor = new JLabel();
 	
 	
 	// JMenu stuff
@@ -60,6 +61,9 @@ public class GUI extends JFrame implements ActionListener {
 		if (choice.equals("Start")) {
 			_board = new Board();
 			_board.startGame();
+			_m = new ManageTurns();
+			_m.resetPlayer();
+			teamColor.setText("Red Team");
 			update();
 			msg.setText("New Game");
 		}
@@ -73,7 +77,6 @@ public class GUI extends JFrame implements ActionListener {
 		input = new JPanel();
 		_driver = d;
 		_board = b;
-		//		_board.boardLocations(b.randomNames(b.readFile("GameWords.txt")));
 		_board.startGame();
 
 		_mainPanel = mp;
@@ -119,20 +122,18 @@ public class GUI extends JFrame implements ActionListener {
 		_scorePanel.setLayout(new FlowLayout());
 		JLabel score = new JLabel(_board.getRedCount() + " - " + _board.getBlueCount());
 		_scorePanel.add(score);
-		JLabel teamColor = new JLabel("Red Team");
+		teamColor = new JLabel("Red Team");
 		_scorePanel.add(teamColor);
 
 		JButton switchTurn = new JButton("Switch Turn");
-		//		switchTurn.addActionListener(new SwitchTurn(_m));
 		switchTurn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				int turn = _m.switchTurn();
-				if(turn == 0) {
+				_m.switchTurn();
+				if(_m.getPlayer() == 0) {
 					teamColor.setText("Red Team");
 				}
-				else if(turn == 1){
+				else if(_m.getPlayer() == 1){
 					teamColor.setText("Blue Team");
 				}
 			}
@@ -227,6 +228,11 @@ public class GUI extends JFrame implements ActionListener {
 		JButton enter2 = new JButton("Enter Count");
 		input.add(enter2);
 		String countAnswer = box.getText();
+		enter2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				
+			}
+		});
 	}
 	
 	
@@ -267,7 +273,6 @@ public class GUI extends JFrame implements ActionListener {
 							j.setContentAreaFilled(false);
 							j.setOpaque(true);
 							
-							_board.setRedCount(_board.getRedCount()-1);
 						}
 						else if (s.getPerson() == 1) {
 							j.setText("BLUE");

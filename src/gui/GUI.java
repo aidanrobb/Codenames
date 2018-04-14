@@ -236,6 +236,33 @@ public class GUI extends JFrame implements ActionListener {
 		});
 	}
 	
+	public void textColor(Location l, JButton colorButton) {
+		if (l.getPerson() == 0) {
+//			colorButton.setText("RED");
+			colorButton.setForeground(Color.RED);
+			colorButton.setContentAreaFilled(false);
+			colorButton.setOpaque(true);
+		}
+		else if (l.getPerson() == 1) {
+//			colorButton.setText("BLUE");
+			colorButton.setForeground(Color.BLUE);
+			colorButton.setContentAreaFilled(false);
+			colorButton.setOpaque(true);
+		}
+		else if (l.getPerson() == 2) {
+			colorButton.setText("CIVILIAN");
+			colorButton.setForeground(Color.GRAY);
+			colorButton.setContentAreaFilled(false);
+			colorButton.setOpaque(true);
+		}
+		else if (l.getPerson() == 3) {
+			colorButton.setText("ASSASSIN");
+			colorButton.setForeground(Color.MAGENTA);
+			colorButton.setContentAreaFilled(false);
+			colorButton.setOpaque(true);
+//			message.setText(_board.Assassin(l, _m));
+		}
+	}
 	
 	public void update() {
 		_cardPanel.removeAll();
@@ -264,6 +291,7 @@ public class GUI extends JFrame implements ActionListener {
 					cards = new JButton("<html>" + s.getCodename() + "<br/>" + agent + "</html>");
 				} else {
 					cards = new JButton(agent);
+					textColor(s, cards);
 
 				}
 				
@@ -278,29 +306,19 @@ public class GUI extends JFrame implements ActionListener {
 							
 							if (s.getPerson() == 0) {
 								j.setText("RED");
-								j.setForeground(Color.RED);
-								j.setContentAreaFilled(false);
-								j.setOpaque(true);
-	//							score = new JLabel(_board.getRedCount() + " - " + _board.getBlueCount());
+								textColor(s, j);
 							}
 							else if (s.getPerson() == 1) {
 								j.setText("BLUE");
-								j.setForeground(Color.BLUE);
-								j.setContentAreaFilled(false);
-								j.setOpaque(true);
-	//							score = new JLabel(_board.getRedCount() + " - " + _board.getBlueCount());
+								textColor(s, j);
 							}
 							else if (s.getPerson() == 2) {
 								j.setText("CIVILIAN");
-								j.setForeground(Color.GRAY);
-								j.setContentAreaFilled(false);
-								j.setOpaque(true);
+								textColor(s, j);
 							}
 							else if (s.getPerson() == 3) {
 								j.setText("ASSASSIN");
-								j.setForeground(Color.MAGENTA);
-								j.setContentAreaFilled(false);
-								j.setOpaque(true);
+								textColor(s, j);
 								message.setText(_board.Assassin(s, _m));
 							}
 						}
@@ -308,7 +326,9 @@ public class GUI extends JFrame implements ActionListener {
 					message.setText(codeName);
 				}
 				else {
+					// ADD COLORS
 					cards = new JButton(agent);
+					textColor(s, cards);
 
 				}
 			}

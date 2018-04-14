@@ -260,45 +260,57 @@ public class GUI extends JFrame implements ActionListener {
 				agent = "ASSASSIN";
 			}
 			if(spymaster) {
-				cards = new JButton("<html>" + s.getCodename() + "<br/>" + agent + "</html>");
+				if (s.getRevealed()==false) {
+					cards = new JButton("<html>" + s.getCodename() + "<br/>" + agent + "</html>");
+				} else {
+					cards = new JButton(agent);
+
+				}
 				
 			}
 			else if(!spymaster) {
-				cards = new JButton(s.getCodename());
-				JButton j = cards;
-				j.addActionListener(new ActionListener(){
-					public void actionPerformed(ActionEvent e){
-						_board.locationIsValid(s);
-						if (s.getPerson() == 0) {
-							j.setText("RED");
-							j.setForeground(Color.RED);
-							j.setContentAreaFilled(false);
-							j.setOpaque(true);
-//							score = new JLabel(_board.getRedCount() + " - " + _board.getBlueCount());
+				if (s.getRevealed()==false) {
+					cards = new JButton(s.getCodename());
+					JButton j = cards;
+					j.addActionListener(new ActionListener(){
+						public void actionPerformed(ActionEvent e){
+							_board.locationIsValid(s);
+							
+							if (s.getPerson() == 0) {
+								j.setText("RED");
+								j.setForeground(Color.RED);
+								j.setContentAreaFilled(false);
+								j.setOpaque(true);
+	//							score = new JLabel(_board.getRedCount() + " - " + _board.getBlueCount());
+							}
+							else if (s.getPerson() == 1) {
+								j.setText("BLUE");
+								j.setForeground(Color.BLUE);
+								j.setContentAreaFilled(false);
+								j.setOpaque(true);
+	//							score = new JLabel(_board.getRedCount() + " - " + _board.getBlueCount());
+							}
+							else if (s.getPerson() == 2) {
+								j.setText("CIVILIAN");
+								j.setForeground(Color.GRAY);
+								j.setContentAreaFilled(false);
+								j.setOpaque(true);
+							}
+							else if (s.getPerson() == 3) {
+								j.setText("ASSASSIN");
+								j.setForeground(Color.MAGENTA);
+								j.setContentAreaFilled(false);
+								j.setOpaque(true);
+								message.setText(_board.Assassin(s, _m));
+							}
 						}
-						else if (s.getPerson() == 1) {
-							j.setText("BLUE");
-							j.setForeground(Color.BLUE);
-							j.setContentAreaFilled(false);
-							j.setOpaque(true);
-//							score = new JLabel(_board.getRedCount() + " - " + _board.getBlueCount());
-						}
-						else if (s.getPerson() == 2) {
-							j.setText("CIVILIAN");
-							j.setForeground(Color.GRAY);
-							j.setContentAreaFilled(false);
-							j.setOpaque(true);
-						}
-						else if (s.getPerson() == 3) {
-							j.setText("ASSASSIN");
-							j.setForeground(Color.MAGENTA);
-							j.setContentAreaFilled(false);
-							j.setOpaque(true);
-							message.setText(_board.Assassin(s, _m));
-						}
-					}
-				});
-				message.setText(codeName);
+					});
+					message.setText(codeName);
+				}
+				else {
+					cards = new JButton(agent);
+
+				}
 			}
 			_cardPanel.add(cards);
 //			ADD ACTIONLISTENER

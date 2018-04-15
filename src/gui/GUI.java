@@ -215,6 +215,8 @@ public class GUI extends JFrame implements ActionListener {
 
 				if(clue) {
 					message.setText("Clue is Valid");
+					spymaster=false;
+					msg.setText("Player View");
 					codeName = getValue;
 					update();
 				}

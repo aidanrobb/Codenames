@@ -48,7 +48,8 @@ public class GUI extends JFrame implements ActionListener {
 	private JLabel teamColor = new JLabel();
 	private JLabel score = new JLabel();
 	JPanel _clueMsg = new JPanel();
-	
+	private JPanel input2;
+	private String _count;
 	
 	// JMenu stuff
 	JMenuBar menuBar;
@@ -63,6 +64,7 @@ public class GUI extends JFrame implements ActionListener {
 		if (choice.equals("New Game")) {
 			_board = new Board();
 			_board.startGame();
+			score.setText(_board.getRedCount() + " - " + _board.getBlueCount());
 			_m = new ManageTurns();
 			_m.resetPlayer();
 			teamColor.setText("Red Team");
@@ -77,6 +79,7 @@ public class GUI extends JFrame implements ActionListener {
 	public GUI(Board b, JPanel mp, main.Driver d) {
 		super(""); 
 		input = new JPanel();
+		input2 = new JPanel();
 		_driver = d;
 		_board = b;
 		_board.startGame();
@@ -227,15 +230,29 @@ public class GUI extends JFrame implements ActionListener {
 			}
 		});
 
+		_mainPanel.add(input2);
 		JTextField count = new JTextField(" Enter Count", 10);
-		input.add(count);
+		input2.add(count);
 		JButton enter2 = new JButton("Enter Count");
-		input.add(enter2);
-		String countAnswer = box.getText();
+		input2.add(enter2);
+		String countAnswer = count.getText();
 		enter2.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				
+				String getValue2 = count.getText();
+				int x = Integer.parseInt(getValue2);
+				if(x>0 && x<26) {
+					message.setText("Count is Valid");
+					_count = getValue2;
+					update();
+					}
+				else {	
+					message.setText("Count must be between 0 and 25");
+				}
+			
 			}
+			
+		
+		
 		});
 	}
 	
@@ -271,6 +288,7 @@ public class GUI extends JFrame implements ActionListener {
 		_cardPanel.removeAll();
 		JButton cards;
 		input.removeAll();
+		input2.removeAll();
 		if (spymaster) {
 			clueStuff();
 		}
@@ -337,7 +355,7 @@ public class GUI extends JFrame implements ActionListener {
 							}
 						}
 					});
-					message.setText(codeName);
+					message.setText("Clue: "+ codeName +  " " + "Count: " + _count);
 				}
 				else {
 					// ADD COLORS

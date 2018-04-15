@@ -71,10 +71,18 @@ public class Board {
 			loc.setRevealed(true);
 		}
 		if(loc.getPerson() == 0) {
-			redCount--;
+			if (redCount<=0) {
+				redCount = 0;
+			} else {
+				redCount--;
+			}
 		}
 		if(loc.getPerson() == 1) {
-			blueCount--;
+			if (blueCount<=0) {
+				blueCount=0;
+			} else {
+				blueCount--;
+			}
 		}
 		if(loc.getPerson() == player) {
 			correctTeam = true;
@@ -179,6 +187,19 @@ public class Board {
 			return false;
 		}
 	}
+	
+	public String winningStateString() {
+		if (winningState()) {
+			if (redCount<=0) {
+				return "GAME OVER - Red Team Wins";
+			} else {
+				return "GAME OVER - Blue Team Wins";
+			}
+		} else {
+			return "";
+		}
+	}
+	
 	/**
 	 * Read over txt file of codenames and convert to arrayList
 	 * @param filename

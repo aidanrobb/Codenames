@@ -304,23 +304,34 @@ public class GUI extends JFrame implements ActionListener {
 					j.addActionListener(new ActionListener(){
 						public void actionPerformed(ActionEvent e){
 							_board.locationIsValid(s);
-							
+							message.setText(_board.winningStateString());
+
 							if (s.getPerson() == 0) {
 								j.setText("RED");
 								textColor(s, j);
+								score.setText(_board.getRedCount() + " - " + _board.getBlueCount());
+								j.setEnabled(false);
+//								j.setDisabledIcon(j.getIcon());
 							}
 							else if (s.getPerson() == 1) {
 								j.setText("BLUE");
 								textColor(s, j);
+								score.setText(_board.getRedCount() + " - " + _board.getBlueCount());
+								j.setEnabled(false);
+
 							}
 							else if (s.getPerson() == 2) {
 								j.setText("CIVILIAN");
 								textColor(s, j);
+								j.setEnabled(false);
+
 							}
 							else if (s.getPerson() == 3) {
 								j.setText("ASSASSIN");
 								textColor(s, j);
 								message.setText(_board.Assassin(s, _m));
+								j.setEnabled(false);
+
 							}
 						}
 					});

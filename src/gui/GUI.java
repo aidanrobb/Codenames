@@ -47,6 +47,7 @@ public class GUI extends JFrame implements ActionListener {
 	private JPanel input;
 	private JLabel teamColor = new JLabel();
 	private JLabel score = new JLabel();
+	JPanel _clueMsg = new JPanel();
 	
 	
 	// JMenu stuff
@@ -110,7 +111,7 @@ public class GUI extends JFrame implements ActionListener {
 		msg.setText("Welcome");
 
 		//clue message 
-		JPanel _clueMsg = new JPanel(); 
+		_clueMsg = new JPanel(); 
 		_mainPanel.add(_clueMsg);
 		
 		message = new JLabel();
@@ -209,7 +210,7 @@ public class GUI extends JFrame implements ActionListener {
 					_switchPanel.setBackground(Color.CYAN);
 					_cardPanel.setBackground(Color.CYAN);
 					input.setBackground(Color.CYAN);
-//					_clueMsg.setBackground(Color.CYAN);
+					_clueMsg.setBackground(Color.CYAN);
 				}
 
 				if(clue) {

@@ -70,9 +70,10 @@ public class GUI extends JFrame implements ActionListener {
 			_m = new ManageTurns();
 			_m.resetPlayer();
 			teamColor.setText("Red Team");
-			update();
 			msg.setText("New Game");
 			message.setText("Welcome");
+			spymaster=true;
+			update();
 		}
 		else if (choice.equals("Quit")) { 
 			System.exit(0); 
@@ -151,6 +152,8 @@ public class GUI extends JFrame implements ActionListener {
 				else if(_m.getPlayer() == 1){
 					teamColor.setText("Blue Team");
 				}
+				spymaster=true;
+				update();
 			}
 		});
 
@@ -250,6 +253,7 @@ public class GUI extends JFrame implements ActionListener {
 					_switchPanel.setBackground(Color.CYAN);
 					_cardPanel.setBackground(Color.CYAN);
 					input.setBackground(Color.CYAN);
+					input2.setBackground(Color.CYAN);
 					_clueMsg.setBackground(Color.CYAN);
 				}
 
@@ -345,6 +349,14 @@ public class GUI extends JFrame implements ActionListener {
 								textColor(s, j);
 								score.setText(_board.getRedCount() + " - " + _board.getBlueCount());
 								j.setEnabled(false);
+								if (_m.getPlayer()==1) {
+									_m.setPlayer(0);
+									spymaster=true;
+									msg.setText("Spymaster View");
+									teamColor.setText("Red Team");
+									message.setText("Blue turn ended - Red Team's Turn");
+									update();
+								}
 //								j.setDisabledIcon(j.getIcon());
 							}
 							else if (s.getPerson() == 1) {
@@ -352,12 +364,34 @@ public class GUI extends JFrame implements ActionListener {
 								textColor(s, j);
 								score.setText(_board.getRedCount() + " - " + _board.getBlueCount());
 								j.setEnabled(false);
+								if (_m.getPlayer()==0) {
+									_m.setPlayer(1);
+									spymaster=true;
+									msg.setText("Spymaster View");
+									teamColor.setText("Blue Team");
+									message.setText("Red turn ended - Blue Team's Turn");
+									update();
+								}
 
 							}
 							else if (s.getPerson() == 2) {
 								j.setText("CIVILIAN");
 								textColor(s, j);
 								j.setEnabled(false);
+								if (_m.getPlayer()==0) {
+									_m.setPlayer(1);
+									msg.setText("Spymaster View");
+									teamColor.setText("Blue Team");
+									message.setText("Red turn ended - Blue Team's Turn");
+									spymaster=true;
+									update();
+								} else {
+									_m.setPlayer(0);
+									msg.setText("Spymaster View");
+									teamColor.setText("Red Team");
+									message.setText("Blue turn ended - Red Team's Turn");
+									spymaster=true;
+								}
 
 							}
 							else if (s.getPerson() == 3) {
@@ -365,6 +399,15 @@ public class GUI extends JFrame implements ActionListener {
 								textColor(s, j);
 								message.setText(_board.Assassin(s, _m));
 								j.setEnabled(false);
+								if (_m.getPlayer()==0) {
+									_m.setPlayer(1);
+									teamColor.setText("Blue Team");
+									spymaster=true;
+								} else {
+									_m.setPlayer(0);
+									teamColor.setText("Red Team");
+									spymaster=true;
+								}
 
 							}
 						}

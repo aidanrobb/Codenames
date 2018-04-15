@@ -14,8 +14,6 @@ import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import GUIEventHandlers.SwitchTurn;
-
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JFrame;
@@ -40,7 +38,6 @@ public class GUI extends JFrame implements ActionListener {
 	private JPanel _cardPanel;
 	private JPanel _switchPanel;
 	private JPanel _filePanel;
-	private GetUserInput _getUserInput;
 	private boolean spymaster = false;
 	private String codeName;
 	private JLabel message;

@@ -193,6 +193,30 @@ public class GUI extends JFrame implements ActionListener {
 	}
 	
 	public void clueStuff() {
+		_mainPanel.add(input2);
+		JTextField count = new JTextField(" Enter Count", 10);
+		input2.add(count);
+		JButton enter2 = new JButton("Enter Count");
+		input2.add(enter2);
+		String countAnswer = count.getText();
+		enter2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				String getValue2 = count.getText();
+				int x = Integer.parseInt(getValue2);
+				if(x>0 && x<26) {
+					message.setText("Count is Valid");
+					_count = getValue2;
+					update();
+					}
+				else {	
+					message.setText("Count must be between 0 and 25");
+				}
+			
+			}
+			
+		
+		
+		});
 		_mainPanel.add(input);
 		JTextField box = new JTextField(" Enter Clue", 10);
 		input.add(box);
@@ -228,30 +252,7 @@ public class GUI extends JFrame implements ActionListener {
 			}
 		});
 
-		_mainPanel.add(input2);
-		JTextField count = new JTextField(" Enter Count", 10);
-		input2.add(count);
-		JButton enter2 = new JButton("Enter Count");
-		input2.add(enter2);
-		String countAnswer = count.getText();
-		enter2.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				String getValue2 = count.getText();
-				int x = Integer.parseInt(getValue2);
-				if(x>0 && x<26) {
-					message.setText("Count is Valid");
-					_count = getValue2;
-					update();
-					}
-				else {	
-					message.setText("Count must be between 0 and 25");
-				}
-			
-			}
-			
-		
-		
-		});
+	
 	}
 	
 	public void textColor(Location l, JButton colorButton) {

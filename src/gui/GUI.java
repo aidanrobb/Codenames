@@ -55,7 +55,12 @@ public class GUI extends JFrame implements ActionListener {
 	JRadioButtonMenuItem rbMenuItem;
 	JCheckBoxMenuItem cbMenuItem;
 
-
+	/*
+	 * Action performed for the file menu
+	 * Checks to see which input is pressed and what methods to run
+	 *
+	 * @param ActionEvent ae -- to check if the button was clicked
+	 */
 	public void actionPerformed(ActionEvent ae) { 
 		String choice = ae.getActionCommand(); 
 		if (choice.equals("New Game")) {
@@ -74,6 +79,13 @@ public class GUI extends JFrame implements ActionListener {
 		} 
 	} 
 
+	/*
+	 * Class constructor for the GUI class
+	 * 
+	 * @param Board b -- board to use board class methods
+	 * @param JPanel mp -- panel to add everything to
+	 * @param Driver d -- driver to run driver class methods
+	 */
 	public GUI(Board b, JPanel mp, main.Driver d) {
 		super(""); 
 		input = new JPanel();
@@ -186,6 +198,9 @@ public class GUI extends JFrame implements ActionListener {
 //		updateJFrameIfNotHeadless();
 	}
 	
+	/*
+	 * makes sure the JFrame is the latest update from the Driver Class
+	 */
 	public void updateJFrameIfNotHeadless() {
 		if (_driver != null) {
 			_driver.updateJFrame();

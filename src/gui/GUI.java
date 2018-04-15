@@ -60,7 +60,7 @@ public class GUI extends JFrame implements ActionListener {
 
 	public void actionPerformed(ActionEvent ae) { 
 		String choice = ae.getActionCommand(); 
-		if (choice.equals("Start")) {
+		if (choice.equals("New Game")) {
 			_board = new Board();
 			_board.startGame();
 			_m = new ManageTurns();
@@ -92,7 +92,7 @@ public class GUI extends JFrame implements ActionListener {
 		menuBar.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		setJMenuBar(menuBar); 
 		JMenu file = new JMenu("File"); 
-		JMenuItem start = new JMenuItem("Start"); 
+		JMenuItem start = new JMenuItem("New Game"); 
 		start.addActionListener(this); 
 		file.add(start); 
 		menuBar.add(file); 

@@ -210,6 +210,13 @@ public class GUI extends JFrame implements ActionListener {
 		}
 	}
 	
+	/*
+	 * Checks to see if clue value is valid
+	 * Checks to see if count value is valid
+	 * Throws message if either are invalid
+	 *
+	 * Easter Egg is located in this method
+	 */
 	public void clueStuff() {
 		_mainPanel.add(input2);
 		JTextField count = new JTextField(" Enter Count", 10);
@@ -274,6 +281,14 @@ public class GUI extends JFrame implements ActionListener {
 	
 	}
 	
+	/*
+	 * Changes the appearance of the button that has been 
+	 * selected based upon what is stored in the Location
+	 *
+	 * @param Location l -- Location value stored in JButton
+	 * @param JButton colorButton -- JButton to change appearance
+	 * 		based upon its Location's team
+	 */
 	public void textColor(Location l, JButton colorButton) {
 		if (l.getPerson() == 0) {
 //			colorButton.setText("RED");
@@ -302,6 +317,10 @@ public class GUI extends JFrame implements ActionListener {
 		}
 	}
 	
+	/*
+	 * Clears the panels out and updates the information in the
+	 * panels and boxes based upon what the user has inputed
+	 */
 	public void update() {
 		_cardPanel.removeAll();
 		JButton cards;

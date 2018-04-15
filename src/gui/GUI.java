@@ -70,6 +70,7 @@ public class GUI extends JFrame implements ActionListener {
 			teamColor.setText("Red Team");
 			update();
 			msg.setText("New Game");
+			message.setText("Welcome");
 		}
 		else if (choice.equals("Quit")) { 
 			System.exit(0); 

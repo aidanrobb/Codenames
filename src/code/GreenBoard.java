@@ -92,6 +92,7 @@ public class GreenBoard {
 	 * 
 	 * @param codename
 	 * @return True if Location contained the current team's Agent, false otherwise.
+	 * 
 	 */
 	public boolean locationIsValidGreen(Location loc) {
 		int player = m.getPlayer();

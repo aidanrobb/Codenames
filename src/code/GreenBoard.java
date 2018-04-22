@@ -114,6 +114,13 @@ public class GreenBoard {
 				blueCount--;
 			}
 		}
+		if(loc.getPerson() == 3) {
+			if (assassinCount<=0) {
+				assassinCount=0;
+			} else {
+				assassinCount--;
+			}
+		}
 		if(loc.getPerson() == 4) {
 			if (greenCount<=0) {
 				greenCount=0;
@@ -322,31 +329,43 @@ public class GreenBoard {
 		return this.greenBoard;
 	}
 	/**
-	 * Returns which team wins if assassin is chosen. 
+	 * Returns Returns which team is out when assassin is clicked. 
 	 * @param Location l
 	 * @param ManageTurns m
 	 * @return String of which team wins
 	 */
 	public String Assassin(Location l, ManageTurns m) {
-//		if (assassinCount == 2) {
-//			if(l.getPerson() == 3) {
-//				if (m.getPlayer() == 0){
-//					redState = false;
-//				}
-//			}
-//		} else {
-//			return "";
-//		}
+		if (assassinCount == 2) {
+			if(l.getPerson() == 3) {
+				if (m.getPlayer() == 0){
+					redState = false;
+					return "Red Team is out";
+				}
+				else if (m.getPlayer() == 1){
+					blueState = false;
+					return "Blue Team is out";
+				}
+				else if (m.getPlayer() == 4){
+					greenState = false;
+					return "Green Team is out";
+				}
+			}
+		} else if (assassinCount == 1){
+			if(l.getPerson() == 3) {
+				if (m.getPlayer() == 0){
+					redState = false;
+					return "Game Over - Red Team is Out";
+				}
+				else if (m.getPlayer() == 1){
+					blueState = false;
+					return "Game Over - Blue Team is Out";
+				}
+				else if (m.getPlayer() == 4){
+					greenState = false;
+					return "Game Over - Green Team is Out";
+				}
+			}
+		}
 		return "";
-		
-//		if(l.getPerson() == 3) {
-//			if(m.getPlayer() == 1) {
-//				return "GAME OVER!!!     Red Team Wins";
-//			}
-//			else if(m.getPlayer() == 0){
-//				return "GAME OVER!!!     Blue Team Wins";
-//			}
-//		}
-//		return "";
 	}
 }

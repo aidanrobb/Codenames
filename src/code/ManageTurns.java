@@ -48,6 +48,26 @@ public class ManageTurns {
 		return currentPlayer;
 	}
 	
+	public int noRed() {
+		if(currentPlayer == 1) {
+			currentPlayer = 4;
+		}
+		else if(currentPlayer == 4) {
+			currentPlayer = 1;
+		}
+		return currentPlayer;
+	}
+	
+	public int noBlue() {
+		if(currentPlayer == 0) {
+			currentPlayer = 4;
+		}
+		else if(currentPlayer == 4) {
+			currentPlayer = 0;
+		}
+		return currentPlayer;
+	}
+	
 	/**
 	 * Resets to the default player, Red since red always goes first.
 	 * @return Always returns red. 

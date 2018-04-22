@@ -5,7 +5,7 @@ package code;
 public class ManageTurns {
 
 	/**
-	 * Which teams's turn it currently is. 0 for red and 1 for blue;
+	 * Which teams's turn it currently is. 0 for red and 1 for blue, 4 for green;
 	 */
 	private int currentPlayer = 0;
 	
@@ -24,6 +24,25 @@ public class ManageTurns {
 			currentPlayer = 1;
 		}
 		else if(currentPlayer == 1) {
+			currentPlayer = 0;
+		}
+		return currentPlayer;
+	}
+	
+	/**
+	 * Switches to the next turn, including green. If it was red' turn it switches to blue's turn. 
+	 * If it was blue's turn it switches to green's turn 
+	 * If it was green's turn it switches to red's turn 
+	 * @return Which player current has the turn 
+	 */
+	public int switchTurnGreen() {
+		if(currentPlayer == 0) {
+			currentPlayer = 1;
+		}
+		else if(currentPlayer == 1) {
+			currentPlayer = 4;
+		}
+		else if(currentPlayer == 4) {
 			currentPlayer = 0;
 		}
 		return currentPlayer;

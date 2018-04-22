@@ -6,7 +6,7 @@ public class Location {
 	private String _codename;
 	
 	/** int designating if the person at the location is red, blue, civilian, or assassin
-	 * 0 is red, 1 is blue, 2 is civilian, 3 is assassin 
+	 * 0 is red, 1 is blue, 2 is civilian, 3 is assassin , 4 is green
 	 */
 	private int _person;
 	
@@ -55,7 +55,8 @@ public class Location {
 		_codename = c;
 	}
 	/**
-	 * Sets the person instance to either, 0,1,2,3, Which represents red, blue, civilian, assassin, respectively.
+	 * Sets the person instance to either, 0,1,2,3,4 Which represents red, blue, civilian, assassin, 
+	 * and green respectively.
 	 * @param p
 	 */
 	public void setPerson(int p) {

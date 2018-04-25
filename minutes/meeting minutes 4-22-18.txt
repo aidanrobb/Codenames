@@ -1,0 +1,27 @@
+Meeting Minutes for _February 18th 2018________:
+
+Meeting Started at 12:10pm 
+Meeting Attendance: (list all students who were present) [1 minute]
+	Justin(M)q, 
+	Aidan, 
+	Judy, 
+	Josh
+	
+Tasks completed since last meeting [1-2 minutes]
+	* Finished Phase 2
+
+Tasks worked upon but not completed since last meeting [2-4 minutes]
+	* Updated Locations
+	* Updated ManageTurns
+	* Updated Driver
+	
+Goals for the next meeting [20+ minutes]
+	* Update GUI
+
+Schedule for the next week's set of pair programming meetings [3-4 minutes]
+	* (Pair programming sessions should be two hours long (no more, no less))
+	  (Every team member should participate in two sessions each week, with each session including a different team member)
+	  
+Meeting ended: 2:00pm
+
+

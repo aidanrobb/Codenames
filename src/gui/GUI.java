@@ -24,12 +24,15 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import code.Board;
+import code.GreenBoard;
 import code.Location;
 import code.ManageTurns;
 
 public class GUI extends JFrame implements ActionListener {
 	private Board _board;
+	private GreenBoard _greenBoard = new GreenBoard();
 	private main.Driver _driver;
+	private main.Driver _greenDriver;
 	private JPanel _mainPanel;
 	private JPanel _messagePanel;
 	private JLabel msg;
@@ -47,6 +50,7 @@ public class GUI extends JFrame implements ActionListener {
 	JPanel _clueMsg = new JPanel();
 	private JPanel input2;
 	private String _count;
+	private Boolean twoTeam;
 	
 	// JMenu stuff
 	JMenuBar menuBar;
@@ -63,17 +67,31 @@ public class GUI extends JFrame implements ActionListener {
 	 */
 	public void actionPerformed(ActionEvent ae) { 
 		String choice = ae.getActionCommand(); 
-		if (choice.equals("New Game")) {
+		if (choice.equals("2 Team")) {
 			_board = new Board();
 			_board.startGame();
 			score.setText(_board.getRedCount() + " - " + _board.getBlueCount());
 			_m = new ManageTurns();
 			_m.resetPlayer();
 			teamColor.setText("Red Team");
-			msg.setText("New Game");
+			msg.setText("2 Team");
 			message.setText("Welcome");
 			spymaster=true;
+			twoTeam = true;
 			update();
+		}
+		if (choice.equals("3 Team")) {
+			_greenBoard = new GreenBoard();
+			_greenBoard.startGame();
+			score.setText(_greenBoard.getRedCount() + " - " + _greenBoard.getBlueCount() + " - " + _greenBoard.getGreenCount());
+			_m = new ManageTurns();
+			_m.resetPlayer();
+			teamColor.setText("Red Team");
+			msg.setText("3 Team");
+			message.setText("Welcome");
+			spymaster=true;
+			twoTeam = false;
+			greenUpdate();
 		}
 		else if (choice.equals("Quit")) { 
 			System.exit(0); 
@@ -87,12 +105,15 @@ public class GUI extends JFrame implements ActionListener {
 	 * @param JPanel mp -- panel to add everything to
 	 * @param Driver d -- driver to run driver class methods
 	 */
-	public GUI(Board b, JPanel mp, main.Driver d) {
+	public GUI(Board b, JPanel mp, main.Driver d, GreenBoard g) {
 		super(""); 
 		input = new JPanel();
 		input2 = new JPanel();
 		_driver = d;
 		_board = b;
+		_greenBoard = g;
+		_greenDriver = new main.Driver(b, g);
+		_greenBoard.startGame();
 		_board.startGame();
 
 		_mainPanel = mp;
@@ -106,9 +127,13 @@ public class GUI extends JFrame implements ActionListener {
 		menuBar.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		setJMenuBar(menuBar); 
 		JMenu file = new JMenu("File"); 
-		JMenuItem start = new JMenuItem("New Game"); 
-		start.addActionListener(this); 
-		file.add(start); 
+		JMenuItem startTwo = new JMenuItem("2 Team"); 
+		startTwo.addActionListener(this); 
+		file.add(startTwo); 
+		menuBar.add(file); 
+		JMenuItem startThree = new JMenuItem("3 Team"); 
+		startThree.addActionListener(this); 
+		file.add(startThree); 
 		menuBar.add(file); 
 		JMenuItem quit = new JMenuItem("Quit"); 
 		quit.addActionListener(this); 
@@ -145,15 +170,32 @@ public class GUI extends JFrame implements ActionListener {
 		switchTurn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				_m.switchTurn();
-				if(_m.getPlayer() == 0) {
-					teamColor.setText("Red Team");
+				if (twoTeam) {
+					_m.switchTurn();
+					if(_m.getPlayer() == 0) {
+						teamColor.setText("Red Team");
+					}
+					else if(_m.getPlayer() == 1){
+						teamColor.setText("Blue Team");
+					}
+					spymaster=true;
+					update();
+				} else {
+					_m.switchTurnGreen();
+					if(_m.getPlayer() == 0) {
+						teamColor.setText("Red Team");
+					}
+					else if(_m.getPlayer() == 1){
+						teamColor.setText("Blue Team");
+					}
+					else if(_m.getPlayer() == 4){
+						teamColor.setText("Green Team");
+					}
+					spymaster=true;
+					greenUpdate();
 				}
-				else if(_m.getPlayer() == 1){
-					teamColor.setText("Blue Team");
-				}
-				spymaster=true;
-				update();
+					
+				
 			}
 		});
 
@@ -173,19 +215,32 @@ public class GUI extends JFrame implements ActionListener {
 		JButton spymasterButton = new JButton("Spymaster");
 		spymasterButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				spymaster = true;
-				update();
-				//IF COMMENTED OUT DOESN'T WORK 
-				msg.setText("Spymaster View");
+				if (twoTeam) {
+					spymaster = true;
+					update();
+					//IF COMMENTED OUT DOESN'T WORK 
+					msg.setText("Spymaster View");
+				} else {
+					spymaster = true;
+					greenUpdate();
+					//IF COMMENTED OUT DOESN'T WORK 
+					msg.setText("Spymaster View");
+				}
 			}
 		});
 
 		JButton playerButton = new JButton("Player");
 		playerButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				spymaster = false;
-				update();
-				msg.setText("Player View");
+				if (twoTeam) {
+					spymaster = false;
+					update();
+					msg.setText("Player View");
+				} else {
+					spymaster = false;
+					greenUpdate();
+					msg.setText("Player View");
+				}
 			}
 		});
 	
@@ -209,6 +264,14 @@ public class GUI extends JFrame implements ActionListener {
 			_driver.updateJFrame();
 		}
 	}
+	/*
+	 * makes sure the JFrame is the latest update from the Driver Class that uses a GreenBoard as a parameter
+	 */
+	public void updateJFrameIfNotHeadlessGreen() {
+		if (_greenDriver != null) {
+			_greenDriver.updateJFrame();
+		}
+	}
 	
 	/*
 	 * Checks to see if clue value is valid
@@ -226,17 +289,29 @@ public class GUI extends JFrame implements ActionListener {
 		String countAnswer = count.getText();
 		enter2.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				String getValue2 = count.getText();
-				int x = Integer.parseInt(getValue2);
-				if(x>0 && x<26) {
-					message.setText("Count is Valid");
-					_count = getValue2;
-					update();
+				if (twoTeam) {
+					String getValue2 = count.getText();
+					int x = Integer.parseInt(getValue2);
+					if(x>0 && x<26) {
+						message.setText("Count is Valid");
+						_count = getValue2;
+						update();
+						}
+					else {	
+						message.setText("Count must be between 0 and 25");
 					}
-				else {	
-					message.setText("Count must be between 0 and 25");
+				} else {
+					String getValue2 = count.getText();
+					int x = Integer.parseInt(getValue2);
+					if(x>0 && x<26) {
+						message.setText("Count is Valid");
+						_count = getValue2;
+						greenUpdate();
+						}
+					else {	
+						message.setText("Count must be between 0 and 25");
+					}
 				}
-			
 			}
 			
 		
@@ -264,16 +339,30 @@ public class GUI extends JFrame implements ActionListener {
 					_clueMsg.setBackground(Color.CYAN);
 				}
 
-				if(clue) {
-					message.setText("Clue is Valid");
-					spymaster=false;
-					msg.setText("Player View");
-					codeName = getValue;
-					update();
-				}
-				else{
-					message.setText(_board.getMsg());
-					update();
+				if (twoTeam) {
+					if(clue) {
+						message.setText("Clue is Valid");
+						spymaster=false;
+						msg.setText("Player View");
+						codeName = getValue;
+						update();
+					}
+					else{
+						message.setText(_board.getMsg());
+						update();
+					}
+				} else {
+					if(clue) {
+						message.setText("Clue is Valid");
+						spymaster=false;
+						msg.setText("Player View");
+						codeName = getValue;
+						greenUpdate();
+					}
+					else{
+						message.setText(_board.getMsg());
+						greenUpdate();
+					}
 				}
 			}
 		});
@@ -443,6 +532,153 @@ public class GUI extends JFrame implements ActionListener {
 			_cardPanel.add(cards);
 //			ADD ACTIONLISTENER
 			
+			updateJFrameIfNotHeadless();
+		}
+	}
+	public void greenUpdate() {
+		_cardPanel.removeAll();
+		JButton cards;
+		input.removeAll();
+		input2.removeAll();
+		if (spymaster) {
+			clueStuff();
+		}
+		for(Location s : _greenBoard.getBoard()) {
+			cards = new JButton();
+			String agent = "";
+			if(s.getPerson() == 0) {
+				agent = "RED";
+			}
+			else if(s.getPerson() == 1) {
+				agent = "BLUE";
+			}
+			else if(s.getPerson() == 2) {
+				agent = "CIVILIAN";
+			}
+			else if(s.getPerson() == 3) {
+				agent = "ASSASSIN";
+			}
+			else if(s.getPerson() == 4) {
+				agent = "GREEN";
+			}
+			if(spymaster) {
+				if (s.getRevealed()==false) {
+					cards = new JButton("<html>" + s.getCodename() + "<br/>" + agent + "</html>");
+				} else {
+					cards = new JButton(agent);
+					textColor(s, cards);
+					
+				}
+				
+			}
+			else if(!spymaster) {
+				if (s.getRevealed()==false) {
+					cards = new JButton(s.getCodename());
+					JButton j = cards;
+					j.addActionListener(new ActionListener(){
+						public void actionPerformed(ActionEvent e){
+							_greenBoard.locationIsValidGreen(s);
+							message.setText(_greenBoard.winningStateStringGreen());
+							
+							if (s.getPerson() == 0) {
+								j.setText("RED");
+								textColor(s, j);
+								score.setText(_greenBoard.getRedCount() + " - " + _greenBoard.getBlueCount() + " - " 
+										+ _greenBoard.getGreenCount());
+								j.setEnabled(false);
+								if (_m.getPlayer()==1) {
+									_m.setPlayer(0);
+									spymaster=true;
+									msg.setText("Spymaster View");
+									teamColor.setText("Red Team");
+									message.setText("Blue turn ended");
+									greenUpdate();
+								}
+//								j.setDisabledIcon(j.getIcon());
+							}
+							else if (s.getPerson() == 1) {
+								j.setText("BLUE");
+								textColor(s, j);
+								score.setText(_greenBoard.getRedCount() + " - " + _greenBoard.getBlueCount() + " - " 
+										+ _greenBoard.getGreenCount());
+								j.setEnabled(false);
+								if (_m.getPlayer()==0) {
+									_m.setPlayer(1);
+									spymaster=true;
+									msg.setText("Spymaster View");
+									teamColor.setText("Blue Team");
+									message.setText("Red turn ended");
+									greenUpdate();
+								}
+								
+							}
+							else if (s.getPerson() == 2) {
+								j.setText("CIVILIAN");
+								textColor(s, j);
+								j.setEnabled(false);
+								if (_m.getPlayer()==0) {
+									_m.setPlayer(1);
+									msg.setText("Spymaster View");
+									teamColor.setText("Blue Team");
+									message.setText("Red turn ended");
+									spymaster=true;
+									greenUpdate();
+								} else if (s.getPerson() == 4) {
+									j.setText("GREEN");
+									textColor(s, j);
+									score.setText(_greenBoard.getRedCount() + " - " + _greenBoard.getBlueCount() + " - " 
+											+ _greenBoard.getGreenCount());
+									j.setEnabled(false);
+									if (_m.getPlayer()==0) {
+										_m.setPlayer(1);
+										spymaster=true;
+										msg.setText("Spymaster View");
+										teamColor.setText("Blue Team");
+										message.setText("Red turn ended");
+										greenUpdate();
+									}
+									
+								} else {
+									_m.setPlayer(0);
+									msg.setText("Spymaster View");
+									teamColor.setText("Red Team");
+									message.setText("Blue turn ended");
+									spymaster=true;
+								}
+								
+							}
+							else if (s.getPerson() == 3) {
+								j.setText("ASSASSIN");
+								textColor(s, j);
+								message.setText(_greenBoard.Assassin(s, _m));
+								j.setEnabled(false);
+								if (_m.getPlayer()==0) {
+									_m.setPlayer(1);
+									teamColor.setText("Blue Team");
+									spymaster=true;
+								} else {
+									_m.setPlayer(0);
+									teamColor.setText("Red Team");
+									spymaster=true;
+								}
+								
+							}
+						}
+					});
+					message.setText("Clue: "+ codeName +  " " + "Count: " + _count);
+				}
+				else {
+					// ADD COLORS
+					cards = new JButton(agent);
+					textColor(s, cards);
+					
+				}
+			}
+			_cardPanel.add(cards);
+//			ADD ACTIONLISTENER
+			
+			
+			// HMMMMMMMMMMMMMMM????
 			updateJFrameIfNotHeadless();
 		}
 	}

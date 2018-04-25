@@ -8,11 +8,13 @@ public class ManageTurns {
 	 * Which teams's turn it currently is. 0 for red and 1 for blue, 4 for green;
 	 */
 	private int currentPlayer = 0;
+	State g;
 	
 	/**
 	 * Creates a new ManageTurns instance;
 	 */
 	public ManageTurns() {
+		g = new State();
 	}
 	
 	/**
@@ -36,14 +38,22 @@ public class ManageTurns {
 	 * @return Which player current has the turn 
 	 */
 	public int switchTurnGreen() {
-		if(currentPlayer == 0) {
-			currentPlayer = 1;
+		if(g.isRedState() && g.isBlueState() && g.isGreenState()) {
+			if(currentPlayer == 0) {
+				currentPlayer = 1;
+			}
+			if(currentPlayer == 1) {
+				currentPlayer = 4;
+			}
+			if(currentPlayer == 4) {
+				currentPlayer = 0;
 		}
-		else if(currentPlayer == 1) {
-			currentPlayer = 4;
-		}
-		else if(currentPlayer == 4) {
-			currentPlayer = 0;
+		}else if(!g.isBlueState()) {
+			currentPlayer = noBlue();
+		}else if(!g.isRedState()) {
+			currentPlayer = noRed();
+		}else if(!g.isGreenState()) {
+			currentPlayer = switchTurn();
 		}
 		return currentPlayer;
 	}

@@ -38,20 +38,7 @@ public class GreenBoard {
 	 * Boolean stating where red team is still in the game 
 	 */
 	
-	private boolean redState;
-	/**
-	 * Boolean stating where blue team is still in the game 
-	 */
-	
-	private boolean blueState;
-	/**
-	 * Boolean stating where green team is still in the game 
-	 */
-	
-	private boolean greenState;
-	/**
-	 *The amount of assassins left on the board. 
-	 */
+	State s;
 	
 	private int assassinCount;
 	
@@ -69,11 +56,10 @@ public class GreenBoard {
 		blueCount = 5;
 		greenCount = 5;
 		assassinCount = 2;
-		redState = true;
-		blueState = true;
-		greenState = true;
 		greenBoard = new ArrayList<Location>();
 		m = new ManageTurns();
+		s = new State();
+		
 	}
 
 	/**
@@ -339,31 +325,31 @@ public class GreenBoard {
 		if (assassinCount == 2) {
 			if(l.getPerson() == 3) {
 				if (m.getPlayer() == 0){
-					redState = false;
+					s.setRedState(false); 
 					return "Red Team is out";
 				}
 				else if (m.getPlayer() == 1){
-					blueState = false;
+					s.setBlueState(false);
 					return "Blue Team is out";
 				}
 				else if (m.getPlayer() == 4){
-					greenState = false;
+					s.setGreenState(false);
 					return "Green Team is out";
 				}
 			}
 		} else if (assassinCount == 1){
 			if(l.getPerson() == 3) {
 				if (m.getPlayer() == 0){
-					redState = false;
-					return "Game Over - Red Team is Out";
+					s.setRedState(false);
+					return "Red Team is Out";
 				}
 				else if (m.getPlayer() == 1){
-					blueState = false;
-					return "Game Over - Blue Team is Out";
+					s.setBlueState(false);
+					return "Blue Team is Out";
 				}
 				else if (m.getPlayer() == 4){
-					greenState = false;
-					return "Game Over - Green Team is Out";
+					s.setGreenState(false);
+					return "Green Team is Out";
 				}
 			}
 		}

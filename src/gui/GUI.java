@@ -416,6 +416,13 @@ public class GUI extends JFrame implements ActionListener {
 			colorButton.setOpaque(true);
 //			message.setText(_board.Assassin(l, _m));
 		}
+		else if (l.getPerson() == 4) {
+			colorButton.setText("GREEN");
+			colorButton.setForeground(Color.GREEN);
+			colorButton.setContentAreaFilled(false);
+			colorButton.setOpaque(true);
+//			message.setText(_board.Assassin(l, _m));
+		}
 	}
 	
 	/*
@@ -635,27 +642,28 @@ public class GUI extends JFrame implements ActionListener {
 									message.setText("Red turn ended");
 									spymaster=true;
 									greenUpdate();
-								} else if (s.getPerson() == 4) {
-									j.setText("GREEN");
-									textColor(s, j);
-									score.setText(_greenBoard.getRedCount() + " - " + _greenBoard.getBlueCount() + " - " 
-											+ _greenBoard.getGreenCount());
-									j.setEnabled(false);
-									if (_m.getPlayer()==0) {
-										_m.setPlayer(1);
-										spymaster=true;
-										msg.setText("Spymaster View");
-										teamColor.setText("Blue Team");
-										message.setText("Red turn ended");
-										greenUpdate();
-									}
-									
-								} else {
+								}  else {
 									_m.setPlayer(0);
 									msg.setText("Spymaster View");
 									teamColor.setText("Red Team");
 									message.setText("Blue turn ended");
 									spymaster=true;
+								}
+								
+							}
+							else if (s.getPerson() == 4) {
+								j.setText("GREEN");
+								textColor(s, j);
+								score.setText(_greenBoard.getRedCount() + " - " + _greenBoard.getBlueCount() + " - " 
+										+ _greenBoard.getGreenCount());
+								j.setEnabled(false);
+								if (_m.getPlayer()==0) {
+									_m.setPlayer(1);
+									spymaster=true;
+									msg.setText("Spymaster View");
+									teamColor.setText("Blue Team");
+									message.setText("Red turn ended");
+									greenUpdate();
 								}
 								
 							}

@@ -51,6 +51,9 @@ public class GUI extends JFrame implements ActionListener {
 	private JPanel input2;
 	private String _count;
 	private Boolean twoTeam;
+	JButton switchTurn;
+	JButton playerButton;
+	JButton spymasterButton;
 	
 	// JMenu stuff
 	JMenuBar menuBar;
@@ -78,6 +81,9 @@ public class GUI extends JFrame implements ActionListener {
 			message.setText("Welcome");
 			spymaster=true;
 			twoTeam = true;
+			switchTurn.setEnabled(true);
+			playerButton.setEnabled(true);
+			spymasterButton.setEnabled(true);
 			update();
 		}
 		if (choice.equals("3 Team")) {
@@ -91,6 +97,9 @@ public class GUI extends JFrame implements ActionListener {
 			message.setText("Welcome");
 			spymaster=true;
 			twoTeam = false;
+			switchTurn.setEnabled(true);
+			playerButton.setEnabled(true);
+			spymasterButton.setEnabled(true);
 			greenUpdate();
 		}
 		else if (choice.equals("Quit")) { 
@@ -166,7 +175,8 @@ public class GUI extends JFrame implements ActionListener {
 		teamColor = new JLabel("Red Team");
 		_scorePanel.add(teamColor);
 
-		JButton switchTurn = new JButton("Switch Turn");
+		switchTurn = new JButton("Switch Turn");
+		switchTurn.setEnabled(false);
 		switchTurn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -212,7 +222,8 @@ public class GUI extends JFrame implements ActionListener {
 		// switchPanel
 		_switchPanel = new JPanel();
 		_switchPanel.setLayout(new BoxLayout(_switchPanel, BoxLayout.X_AXIS));
-		JButton spymasterButton = new JButton("Spymaster");
+		spymasterButton = new JButton("Spymaster");
+		spymasterButton.setEnabled(false);
 		spymasterButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if (twoTeam) {
@@ -229,7 +240,8 @@ public class GUI extends JFrame implements ActionListener {
 			}
 		});
 
-		JButton playerButton = new JButton("Player");
+		playerButton = new JButton("Player");
+		playerButton.setEnabled(false);
 		playerButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if (twoTeam) {

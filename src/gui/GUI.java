@@ -686,10 +686,10 @@ public class GUI extends JFrame implements ActionListener {
 									spymaster=true;
 									msg.setText("Spymaster View");
 									if (_state.isBlueState()) {
-										_m.switchTurnGreen();
+										_m.setPlayer(1);
 										teamColor.setText("Blue Team");
 									} else {
-										_m.switchTurnGreen();
+										_m.setPlayer(4);
 										teamColor.setText("Green Team");
 									}
 									message.setText("Red turn ended");
@@ -779,12 +779,12 @@ public class GUI extends JFrame implements ActionListener {
 									spymaster=true;
 									msg.setText("Spymaster View");
 									message.setText(_greenBoard.Assassin(s, _m));
-									_greenBoard.setAssassinCount(_greenBoard.getAssassinCount()-1);
+//									_greenBoard.setAssassinCount(_greenBoard.getAssassinCount()-1);
 									if (_state.isBlueState()) {
-										_m.switchTurnGreen();
+										_m.setPlayer(1);
 										teamColor.setText("Blue Team");
 									} else {
-										_m.switchTurnGreen();
+										_m.setPlayer(4);
 										teamColor.setText("Green Team");
 									}
 									greenUpdate();
@@ -793,12 +793,12 @@ public class GUI extends JFrame implements ActionListener {
 									spymaster=true;
 									msg.setText("Spymaster View");
 									message.setText(_greenBoard.Assassin(s, _m));
-									_greenBoard.setAssassinCount(_greenBoard.getAssassinCount()-1);
+//									_greenBoard.setAssassinCount(_greenBoard.getAssassinCount()-1);
 									if (_state.isGreenState()) {
-										_m.switchTurnGreen();
+										_m.setPlayer(4);
 										teamColor.setText("Green Team");
 									} else {
-										_m.switchTurnGreen();
+										_m.setPlayer(0);
 										teamColor.setText("Red Team");
 									}
 									greenUpdate();
@@ -809,7 +809,7 @@ public class GUI extends JFrame implements ActionListener {
 									System.out.println(_greenBoard.getAssassinCount());
 //									_greenBoard.setAssassinCount(2);
 									message.setText(_greenBoard.Assassin(s, _m));
-									_greenBoard.setAssassinCount(_greenBoard.getAssassinCount()-1);
+//									_greenBoard.setAssassinCount(_greenBoard.getAssassinCount()-1);
 									if (_state.isRedState()) {
 										_m.switchTurnGreen();
 										teamColor.setText("Red Team");

@@ -55,7 +55,7 @@ public class GreenBoard {
 		redCount = 6;
 		blueCount = 5;
 		greenCount = 5;
-		assassinCount = 2;
+		assassinCount = 3;
 		greenBoard = new ArrayList<Location>();
 		m = new ManageTurns();
 		s = new State();
@@ -341,18 +341,26 @@ public class GreenBoard {
 			if(l.getPerson() == 3) {
 				if (m.getPlayer() == 0){
 					s.setRedState(false);
-					return "Red Team is Out";
+					return "Game Over - Red Team is Out";
 				}
 				else if (m.getPlayer() == 1){
 					s.setBlueState(false);
-					return "Blue Team is Out";
+					return "Game Over - Blue Team is Out";
 				}
 				else if (m.getPlayer() == 4){
 					s.setGreenState(false);
-					return "Green Team is Out";
+					return "Game Over - Green Team is Out";
 				}
 			}
 		}
 		return "";
+	}
+
+	public int getAssassinCount() {
+		return assassinCount;
+	}
+
+	public void setAssassinCount(int assassinCount) {
+		this.assassinCount = assassinCount;
 	}
 }

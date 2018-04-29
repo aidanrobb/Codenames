@@ -55,8 +55,9 @@ public class ManageTurns {
 			else if(currentPlayer == 4) {
 				if (g.isRedState()) {
 					currentPlayer = 0;
+				} else {
+					currentPlayer = 1;
 				}
-				currentPlayer = 1;
 			}
 			return currentPlayer;
 	}

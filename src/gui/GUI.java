@@ -27,6 +27,7 @@ import code.Board;
 import code.GreenBoard;
 import code.Location;
 import code.ManageTurns;
+import code.State;
 
 public class GUI extends JFrame implements ActionListener {
 	private Board _board;
@@ -54,6 +55,7 @@ public class GUI extends JFrame implements ActionListener {
 	JButton switchTurn;
 	JButton playerButton;
 	JButton spymasterButton;
+	State _state;
 	
 	// JMenu stuff
 	JMenuBar menuBar;
@@ -124,6 +126,7 @@ public class GUI extends JFrame implements ActionListener {
 		_greenDriver = new main.Driver(b, g);
 		_greenBoard.startGame();
 		_board.startGame();
+		_state = new State();
 
 		_mainPanel = mp;
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.Y_AXIS));
@@ -180,6 +183,7 @@ public class GUI extends JFrame implements ActionListener {
 		switchTurn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.println(_m.getPlayer());
 				if (twoTeam) {
 					_m.switchTurn();
 					if(_m.getPlayer() == 0) {
@@ -668,20 +672,27 @@ public class GUI extends JFrame implements ActionListener {
 								
 							}
 							else if (s.getPerson() == 3) {
+								if (_m.getPlayer() == 0) {
+									_state.setRedState(false);
+								} else if (_m.getPlayer() == 1) {
+									_state.setBlueState(false);
+								} else if (_m.getPlayer() == 4) {
+									_state.setGreenState(false);
+								}
 								j.setText("ASSASSIN");
 								textColor(s, j);
 								message.setText(_greenBoard.Assassin(s, _m));
 								j.setEnabled(false);
-								if (_m.getPlayer()==0) {
-									_m.setPlayer(1);
-									teamColor.setText("Blue Team");
-									spymaster=true;
-								} else {
-									_m.setPlayer(0);
-									teamColor.setText("Red Team");
-									spymaster=true;
-								}
-								
+//								if (_m.getPlayer()==0) {
+//									_m.setPlayer(1);
+//									teamColor.setText("Blue Team");
+//									spymaster=true;
+//								} else {
+//									_m.setPlayer(0);
+//									teamColor.setText("Red Team");
+//									spymaster=true;
+//								}
+								_m.switchTurnGreen();
 							}
 						}
 					});

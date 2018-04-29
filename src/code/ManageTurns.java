@@ -38,45 +38,32 @@ public class ManageTurns {
 	 * @return Which player current has the turn 
 	 */
 	public int switchTurnGreen() {
-		if(g.isRedState() && g.isBlueState() && g.isGreenState()) {
 			if(currentPlayer == 0) {
-				currentPlayer = 1;
+				if (g.isBlueState()) {
+					currentPlayer = 1;
+				} else {
+					currentPlayer = 4;
+				}
 			}
 			else if(currentPlayer == 1) {
-				currentPlayer = 4;
+				if (g.isGreenState()) {
+					currentPlayer = 4;
+				} else {
+					currentPlayer = 0;
+				}
 			}
 			else if(currentPlayer == 4) {
-				currentPlayer = 0;
-		}
-		}else if(!g.isBlueState()) {
-			currentPlayer = noBlue();
-		}else if(!g.isRedState()) {
-			currentPlayer = noRed();
-		}else if(!g.isGreenState()) {
-			currentPlayer = switchTurn();
-		}
-		return currentPlayer;
+				if (g.isRedState()) {
+					currentPlayer = 0;
+				}
+				currentPlayer = 1;
+			}
+			return currentPlayer;
 	}
+		
+
 	
-	public int noRed() {
-		if(currentPlayer == 1) {
-			currentPlayer = 4;
-		}
-		else if(currentPlayer == 4) {
-			currentPlayer = 1;
-		}
-		return currentPlayer;
-	}
 	
-	public int noBlue() {
-		if(currentPlayer == 0) {
-			currentPlayer = 4;
-		}
-		else if(currentPlayer == 4) {
-			currentPlayer = 0;
-		}
-		return currentPlayer;
-	}
 	
 	/**
 	 * Resets to the default player, Red since red always goes first.

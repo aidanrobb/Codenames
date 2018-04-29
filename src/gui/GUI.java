@@ -609,12 +609,12 @@ public class GUI extends JFrame implements ActionListener {
 								score.setText(_greenBoard.getRedCount() + " - " + _greenBoard.getBlueCount() + " - " 
 										+ _greenBoard.getGreenCount());
 								j.setEnabled(false);
-								if (_m.getPlayer()==1) {
+								if (_m.getPlayer()==4) {
 									_m.setPlayer(0);
 									spymaster=true;
 									msg.setText("Spymaster View");
 									teamColor.setText("Red Team");
-									message.setText("Blue turn ended");
+									message.setText("Green turn ended");
 									greenUpdate();
 								}
 //								j.setDisabledIcon(j.getIcon());
@@ -661,12 +661,12 @@ public class GUI extends JFrame implements ActionListener {
 								score.setText(_greenBoard.getRedCount() + " - " + _greenBoard.getBlueCount() + " - " 
 										+ _greenBoard.getGreenCount());
 								j.setEnabled(false);
-								if (_m.getPlayer()==0) {
-									_m.setPlayer(1);
+								if (_m.getPlayer()==1) {
+									_m.setPlayer(4);
 									spymaster=true;
 									msg.setText("Spymaster View");
-									teamColor.setText("Blue Team");
-									message.setText("Red turn ended");
+									teamColor.setText("Green Team");
+									message.setText("Blue turn ended");
 									greenUpdate();
 								}
 								
@@ -682,6 +682,7 @@ public class GUI extends JFrame implements ActionListener {
 								j.setText("ASSASSIN");
 								textColor(s, j);
 								message.setText(_greenBoard.Assassin(s, _m));
+								
 								j.setEnabled(false);
 //								if (_m.getPlayer()==0) {
 //									_m.setPlayer(1);

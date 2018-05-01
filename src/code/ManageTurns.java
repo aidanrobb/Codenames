@@ -38,27 +38,29 @@ public class ManageTurns {
 	 * @return Which player current has the turn 
 	 */
 	public int switchTurnGreen() {
+		int c = -1;
 			if(currentPlayer == 0) {
 				if (g.isBlueState()) {
-					currentPlayer = 1;
+					c = 1;
 				} else {
-					currentPlayer = 4;
+					c = 4;
 				}
 			}
 			else if(currentPlayer == 1) {
 				if (g.isGreenState()) {
-					currentPlayer = 4;
+					c = 4;
 				} else {
-					currentPlayer = 0;
+					c = 0;
 				}
 			}
 			else if(currentPlayer == 4) {
 				if (g.isRedState()) {
-					currentPlayer = 0;
+					c = 0;
 				} else {
-					currentPlayer = 1;
+					c = 1;
 				}
 			}
+			currentPlayer = c;
 			return currentPlayer;
 	}
 		

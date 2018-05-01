@@ -94,6 +94,7 @@ public class GUI extends JFrame implements ActionListener {
 			score.setText(_greenBoard.getRedCount() + " - " + _greenBoard.getBlueCount() + " - " + _greenBoard.getGreenCount());
 			_m = new ManageTurns();
 			_m.resetPlayer();
+//			System.out.println(_m.getPlayer());
 			teamColor.setText("Red Team");
 			msg.setText("3 Team");
 			message.setText("Welcome");
@@ -127,7 +128,7 @@ public class GUI extends JFrame implements ActionListener {
 		_greenBoard.startGame();
 		_board.startGame();
 		_state = new State();
-		System.out.println(_greenBoard.getAssassinCount());
+//		System.out.println(_greenBoard.getAssassinCount());
 
 		_mainPanel = mp;
 		_mainPanel.setLayout(new BoxLayout(_mainPanel, BoxLayout.Y_AXIS));
@@ -184,8 +185,8 @@ public class GUI extends JFrame implements ActionListener {
 		switchTurn.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(_m.getPlayer());
-				System.out.println(_state.isRedState());
+//				System.out.println(_m.getPlayer());
+//				System.out.println(_state.isRedState());
 				if (twoTeam) {
 					_m.switchTurn();
 					if(_m.getPlayer() == 0) {
@@ -197,18 +198,44 @@ public class GUI extends JFrame implements ActionListener {
 					spymaster=true;
 					update();
 				} else {
+//					greenUpdate();
 					_m.switchTurnGreen();
+					
 					if(_m.getPlayer() == 0) {
-						teamColor.setText("Red Team");
+						if(_state.isRedState()) {
+							teamColor.setText("Red Team");
+						}
+						else {
+							_m.setPlayer(1);
+							teamColor.setText("Blue Team");
+						}
 					}
 					else if(_m.getPlayer() == 1){
-						teamColor.setText("Blue Team");
+						if(_state.isBlueState()) {
+							teamColor.setText("Blue Team");
+						}
+						else {
+							_m.setPlayer(4);
+							teamColor.setText("Green Team");
+						}
 					}
 					else if(_m.getPlayer() == 4){
-						teamColor.setText("Green Team");
+						if(_state.isGreenState()) {
+							teamColor.setText("Green Team");
+						}
+						else {
+							_m.setPlayer(0);
+							teamColor.setText("Red Team");
+						}
 					}
+					System.out.println(_m.getPlayer());
+					System.out.println("Blue State is " + _state.isBlueState());
+					System.out.println("Red State is " + _state.isRedState());
+					System.out.println("Green State is " + _state.isGreenState());
 					spymaster=true;
 					greenUpdate();
+//					_m.switchTurnGreen();
+					
 				}
 					
 				
@@ -731,14 +758,14 @@ public class GUI extends JFrame implements ActionListener {
 										+ _greenBoard.getGreenCount());
 								j.setEnabled(false);
 								if (_m.getPlayer()==0) {
-									System.out.println(_m.getPlayer());
+//									System.out.println(_m.getPlayer());
 									spymaster=true;
 									msg.setText("Spymaster View");
 									if (_state.isBlueState()) {
 //										_m.setPlayer(1);
 										_m.switchTurnGreen();
 										teamColor.setText("Blue Team");
-										System.out.println(_m.getPlayer());
+//										System.out.println(_m.getPlayer());
 									} else {
 										_m.switchTurnGreen();
 //										_m.setPlayer(4);
@@ -806,7 +833,7 @@ public class GUI extends JFrame implements ActionListener {
 								else if (_m.getPlayer()==4) {
 									spymaster=true;
 									msg.setText("Spymaster View");
-									System.out.println(_greenBoard.getAssassinCount());
+//									System.out.println(_greenBoard.getAssassinCount());
 //									_greenBoard.setAssassinCount(2);
 									message.setText(_greenBoard.Assassin(s, _m));
 //									_greenBoard.setAssassinCount(_greenBoard.getAssassinCount()-1);

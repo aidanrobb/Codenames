@@ -91,6 +91,10 @@ public class GUI extends JFrame implements ActionListener {
 		if (choice.equals("3 Team")) {
 			_greenBoard = new GreenBoard();
 			_greenBoard.startGame();
+			_state = new State();
+//			System.out.println("Blue state is " + _state.isBlueState());
+//			System.out.println("Red State is " +_state.isRedState());
+//			System.out.println("Green State is " + _state.isGreenState());
 			score.setText(_greenBoard.getRedCount() + " - " + _greenBoard.getBlueCount() + " - " + _greenBoard.getGreenCount());
 			_m = new ManageTurns();
 			_m.resetPlayer();

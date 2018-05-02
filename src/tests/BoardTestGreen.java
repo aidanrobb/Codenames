@@ -156,6 +156,46 @@ public class BoardTestGreen {
 		assertEquals(greenEndsGameRedWins.Assassin(l,mt),"Red Team Wins");
 	}
 	
+	@Test
+	public void nextTurnTwoAssassins() {
+		GreenBoard twoAssassins = new GreenBoard();
+		twoAssassins.setAssassinCount(2);
+		
+		ManageTurns mtRed = new ManageTurns();
+		mtRed.setPlayer(0);
+		mtRed.switchTurnGreen();
+		assertEquals(mtRed.getPlayer(), 1);
+		
+		ManageTurns mtBlue = new ManageTurns();
+		mtBlue.setPlayer(1);
+		mtBlue.switchTurnGreen();
+		assertEquals(mtBlue.getPlayer(), 4);
+		
+		ManageTurns mtGreen = new ManageTurns();
+		mtGreen.setPlayer(4);
+		mtGreen.switchTurnGreen();
+		assertEquals(mtGreen.getPlayer(), 0);
+	}
+	
+	@Test
+	public void nextTurnOneAssassin() {
+		GreenBoard oneAssassin = new GreenBoard();
+		oneAssassin.setAssassinCount(1);
+		
+		ManageTurns redOutOnBlue = new ManageTurns();
+		s.setRedState(false);
+		redOutOnBlue.setPlayer(1);
+		redOutOnBlue.switchTurnGreen();
+		assertEquals(redOutOnBlue.getPlayer(), 4);
+	
+		ManageTurns redOutOnGreen = new ManageTurns();
+		s.setRedState(false);
+		redOutOnGreen.setPlayer(4);
+		redOutOnGreen.switchTurnGreen();
+		assertEquals(redOutOnGreen.getPlayer(), 1);
+		
+	}
+	
 	
 	
 	

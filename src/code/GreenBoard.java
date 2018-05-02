@@ -341,15 +341,15 @@ public class GreenBoard {
 			if(l.getPerson() == 3) {
 				if (m.getPlayer() == 0){
 					s.setRedState(false);
-					return "Game Over - Red Team is Out";
+					return "Game Over - Red Team is out";
 				}
 				else if (m.getPlayer() == 1){
 					s.setBlueState(false);
-					return "Game Over - Blue Team is Out";
+					return "Game Over - Blue Team is out";
 				}
 				else if (m.getPlayer() == 4){
 					s.setGreenState(false);
-					return "Game Over - Green Team is Out";
+					return "Game Over - Green Team is out";
 				}
 			}
 		}

@@ -541,6 +541,7 @@ public class GUI extends JFrame implements ActionListener {
 								textColor(s, j);
 								score.setText(_board.getRedCount() + " - " + _board.getBlueCount());
 								j.setEnabled(false);
+								message.setText("Clue: "+ codeName +  " " + "Count: " + _count);
 								if (_m.getPlayer()==1) {
 									_m.setPlayer(0);
 									spymaster=true;
@@ -556,6 +557,7 @@ public class GUI extends JFrame implements ActionListener {
 								textColor(s, j);
 								score.setText(_board.getRedCount() + " - " + _board.getBlueCount());
 								j.setEnabled(false);
+								message.setText("Clue: "+ codeName +  " " + "Count: " + _count);
 								if (_m.getPlayer()==0) {
 									_m.setPlayer(1);
 									spymaster=true;
@@ -570,6 +572,7 @@ public class GUI extends JFrame implements ActionListener {
 								j.setText("CIVILIAN");
 								textColor(s, j);
 								j.setEnabled(false);
+								message.setText("Clue: "+ codeName +  " " + "Count: " + _count);
 								if (_m.getPlayer()==0) {
 									_m.setPlayer(1);
 									msg.setText("Spymaster View");

@@ -17,6 +17,14 @@ public class ManageTurns {
 		g = new State();
 	}
 	
+	
+	/**
+	 * Getter Method for the MT State
+	 */
+	public State getMTState() {
+		return g;
+	}
+	
 	/**
 	 * Switches to the next turn. If it was red' turn it switches to blue's turn. If it was blue's turn it switches to red's turn 
 	 * @return Which player current has the turn 

@@ -121,21 +121,22 @@ public class BoardTestGreen {
 	
 	@Test
 	public void testAssassinGreenBlue() {
-		ManageTurns mt = new ManageTurns();
 		Location l = new Location();
 		GreenBoard blueFindsFirst = new GreenBoard();
+		ManageTurns mtOne = new ManageTurns();
 		blueFindsFirst.setAssassinCount(2);
 		l.setPerson(3);
-		mt.setPlayer(1);
-		assertEquals(blueFindsFirst.Assassin(l,mt),"Blue Team is out");
+		mtOne.setPlayer(1);
+		assertEquals(blueFindsFirst.Assassin(l,mtOne),"Blue Team is out");
 		
-		GreenBoard blueEndsGameGreenWins = new GreenBoard();
-		blueEndsGameGreenWins.setAssassinCount(1);
+		GreenBoard blueEndsGameRedWins = new GreenBoard();
+		ManageTurns mtTwo= new ManageTurns();
+		blueEndsGameRedWins.setAssassinCount(1);
 		l.setPerson(3);
-		mt.setPlayer(1);
-		s.setRedState(false);
-		assertFalse(s.isRedState());
-		assertEquals(blueEndsGameGreenWins.Assassin(l,mt),"Green Team Wins");
+		mtTwo.setPlayer(1);
+		mtTwo.getMTState().setGreenState(false);
+		assertEquals(blueEndsGameRedWins.Assassin(l,mtTwo),"Red Team Wins");
+		System.out.println(mtTwo.getMTState().isRedState());
 	}
 	
 	@Test
@@ -183,17 +184,40 @@ public class BoardTestGreen {
 		oneAssassin.setAssassinCount(1);
 		
 		ManageTurns redOutOnBlue = new ManageTurns();
-		s.setRedState(false);
+//		s.setRedState(false);
 		redOutOnBlue.setPlayer(1);
 		redOutOnBlue.switchTurnGreen();
 		assertEquals(redOutOnBlue.getPlayer(), 4);
 	
 		ManageTurns redOutOnGreen = new ManageTurns();
-		s.setRedState(false);
+		redOutOnGreen.getMTState().setRedState(false);
 		redOutOnGreen.setPlayer(4);
 		redOutOnGreen.switchTurnGreen();
 		assertEquals(redOutOnGreen.getPlayer(), 1);
 		
+		ManageTurns blueOutOnGreen = new ManageTurns();
+		blueOutOnGreen.getMTState().setBlueState(false);
+		blueOutOnGreen.setPlayer(4);
+		blueOutOnGreen.switchTurnGreen();
+		assertEquals(blueOutOnGreen.getPlayer(), 0);
+		
+		ManageTurns blueOutOnRed = new ManageTurns();
+		blueOutOnRed.getMTState().setBlueState(false);
+		blueOutOnRed.setPlayer(0);
+		blueOutOnRed.switchTurnGreen();
+		assertEquals(blueOutOnRed.getPlayer(), 4);
+		
+		ManageTurns greenOutOnRed = new ManageTurns();
+		greenOutOnRed.getMTState().setGreenState(false);
+		greenOutOnRed.setPlayer(0);
+		greenOutOnRed.switchTurnGreen();
+		assertEquals(greenOutOnRed.getPlayer(), 1);
+		
+		ManageTurns greenOutOnBlue= new ManageTurns();
+		greenOutOnBlue.getMTState().setGreenState(false);
+		greenOutOnBlue.setPlayer(1);
+		greenOutOnBlue.switchTurnGreen();
+		assertEquals(greenOutOnBlue.getPlayer(), 0);
 	}
 	
 	

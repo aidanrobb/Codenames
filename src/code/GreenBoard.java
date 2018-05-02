@@ -341,21 +341,32 @@ public class GreenBoard {
 			if(l.getPerson() == 3) {
 				if (m.getPlayer() == 0){
 					s.setRedState(false);
-					return "Game Over - Red Team is out";
 				}
 				else if (m.getPlayer() == 1){
 					s.setBlueState(false);
-					return "Game Over - Blue Team is out";
 				}
 				else if (m.getPlayer() == 4){
 					s.setGreenState(false);
-					return "Game Over - Green Team is out";
 				}
 			}
+			return assassinHelp();	
 		}
 		return "";
 	}
 
+	public String assassinHelp() {
+		if (s.isRedState()) {
+			return "Red Team Wins";
+		} else if (s.isBlueState()) {
+			return "Blue Team Wins";
+		} else {
+			return "Green Team Wins";
+		}
+		
+	}
+	
+	
+	
 	public int getAssassinCount() {
 		return assassinCount;
 	}

@@ -101,24 +101,60 @@ public class BoardTestGreen {
 	}
 	
 	@Test
-	public void testAssassinGreen() {
+	public void testAssassinGreenRed() {
 		ManageTurns mt = new ManageTurns();
 		Location l = new Location();
-		s = new State();
 		GreenBoard redFindsFirst = new GreenBoard();
 		redFindsFirst.setAssassinCount(2);
 		l.setPerson(3);
 		mt.setPlayer(0);
 		assertEquals(redFindsFirst.Assassin(l,mt),"Red Team is out");
-		GreenBoard redEndsGame = new GreenBoard();
-		redEndsGame.setAssassinCount(1);
+		
+		GreenBoard redEndsGameBlueWins = new GreenBoard();
+		State sOne = new State();
+		redEndsGameBlueWins.setAssassinCount(1);
 		l.setPerson(3);
 		mt.setPlayer(0);
-		assertEquals(redEndsGame.Assassin(l,mt),"Game Over - Red Team is out");
-	
-		
+		sOne.setGreenState(false);
+		assertEquals(redEndsGameBlueWins.Assassin(l, mt),"Blue Team Wins");
 	}
 	
+	@Test
+	public void testAssassinGreenBlue() {
+		ManageTurns mt = new ManageTurns();
+		Location l = new Location();
+		GreenBoard blueFindsFirst = new GreenBoard();
+		blueFindsFirst.setAssassinCount(2);
+		l.setPerson(3);
+		mt.setPlayer(1);
+		assertEquals(blueFindsFirst.Assassin(l,mt),"Blue Team is out");
+		
+		GreenBoard blueEndsGameGreenWins = new GreenBoard();
+		blueEndsGameGreenWins.setAssassinCount(1);
+		l.setPerson(3);
+		mt.setPlayer(1);
+		s.setRedState(false);
+		assertFalse(s.isRedState());
+		assertEquals(blueEndsGameGreenWins.Assassin(l,mt),"Green Team Wins");
+	}
+	
+	@Test
+	public void testAssassinGreenGreen() {
+		ManageTurns mt = new ManageTurns();
+		Location l = new Location();
+		GreenBoard greenFindsFirst = new GreenBoard();
+		greenFindsFirst.setAssassinCount(2);
+		l.setPerson(3);
+		mt.setPlayer(4);
+		assertEquals(greenFindsFirst.Assassin(l,mt),"Green Team is out");
+		
+		GreenBoard greenEndsGameRedWins = new GreenBoard();
+		greenEndsGameRedWins.setAssassinCount(1);
+		l.setPerson(3);
+		mt.setPlayer(4);
+		s.setBlueState(false);
+		assertEquals(greenEndsGameRedWins.Assassin(l,mt),"Red Team Wins");
+	}
 	
 	
 	

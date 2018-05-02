@@ -41,7 +41,7 @@ public class BoardTest {
 	@Test
 	public void testDecreaseBlue() {
 		b.setBoard(_location);
-
+		b.locationIsValid(_location.get(0));
 		int blueCount = b.getBlueCount();
 		int redCount = b.getRedCount();
 		assertEquals("Method should decrease count if location is blue",7, blueCount);
@@ -51,11 +51,10 @@ public class BoardTest {
 	@Test
 	public void testDecreaseRed() {
 		b.setBoard(_location);
-//		
 		int blueCount = b.getBlueCount();
 		int redCount = b.getRedCount();
 		assertEquals("Method should decrease count if location is Red",8, blueCount);
-		assertEquals("Method should decrease count only if location is Red",8, redCount);
+		assertEquals("Method should decrease count only if location is Red",9, redCount);
 	}
 	
 	@Test
@@ -145,7 +144,7 @@ public class BoardTest {
 		Location l = new Location();
 		l.setPerson(3);
 		mt.setPlayer(0);
-		assertEquals(p.Assassin(l,mt),"Blue Team Wins");
+		assertEquals(p.Assassin(l,mt),"GAME OVER!!!     Blue Team Wins");
 	
 	}
 	
@@ -157,7 +156,7 @@ public class BoardTest {
 		l.setPerson(3);
 		mt.setPlayer(1);
 		System.out.println(mt.getPlayer());
-		assertEquals(p.Assassin(l,mt),"Red Team Wins");
+		assertEquals(p.Assassin(l,mt),"GAME OVER!!!     Red Team Wins");
 	
 		
 	}

@@ -2,17 +2,22 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Desktop;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.net.URISyntaxException;
+import java.net.URL;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import com.sun.org.apache.xerces.internal.util.URI;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBoxMenuItem;
@@ -112,7 +117,15 @@ public class GUI extends JFrame implements ActionListener {
 		else if (choice.equals("Quit")) { 
 			System.exit(0); 
 		} 
-	} 
+	}
+	
+	public static void openWebpage(String urlString) {
+	    try {
+	        Desktop.getDesktop().browse(new URL(urlString).toURI());
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
 
 	/*
 	 * Class constructor for the GUI class
@@ -382,7 +395,13 @@ public class GUI extends JFrame implements ActionListener {
 		enter.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				String getValue = box.getText();
-				boolean clue = _board.goodClue(getValue);
+				boolean clue;
+				if(twoTeam) {
+					 clue = _board.goodClue(getValue);
+				}
+				else {
+					 clue = _greenBoard.goodClueGreen(getValue);
+				}
 				if (getValue.equalsIgnoreCase("bobsaget")) {
 					_mainPanel.setBackground(Color.CYAN);
 					_scorePanel.setBackground(Color.CYAN);
@@ -392,6 +411,9 @@ public class GUI extends JFrame implements ActionListener {
 					input.setBackground(Color.CYAN);
 					input2.setBackground(Color.CYAN);
 					_clueMsg.setBackground(Color.CYAN);
+				}
+				else if(getValue.equalsIgnoreCase("rip")) {
+					openWebpage("https://goo.gl/images/RCcgyJ");
 				}
 
 				if (twoTeam) {
@@ -415,7 +437,7 @@ public class GUI extends JFrame implements ActionListener {
 						greenUpdate();
 					}
 					else{
-						message.setText(_board.getMsg());
+						message.setText(_greenBoard.getMsg());
 						greenUpdate();
 					}
 				}
@@ -648,6 +670,7 @@ public class GUI extends JFrame implements ActionListener {
 								score.setText(_greenBoard.getRedCount() + " - " + _greenBoard.getBlueCount() + " - " 
 										+ _greenBoard.getGreenCount());
 								j.setEnabled(false);
+								message.setText("Clue: "+ codeName +  " " + "Count: " + _count);
 								if (_m.getPlayer()==1) {
 									spymaster=true;
 									msg.setText("Spymaster View");
@@ -681,6 +704,7 @@ public class GUI extends JFrame implements ActionListener {
 								score.setText(_greenBoard.getRedCount() + " - " + _greenBoard.getBlueCount() + " - " 
 										+ _greenBoard.getGreenCount());
 								j.setEnabled(false);
+								message.setText("Clue: "+ codeName +  " " + "Count: " + _count);
 								if (_m.getPlayer()==4) {
 									spymaster=true;
 									msg.setText("Spymaster View");
@@ -713,6 +737,7 @@ public class GUI extends JFrame implements ActionListener {
 								j.setText("CIVILIAN");
 								textColor(s, j);
 								j.setEnabled(false);
+								message.setText("Clue: "+ codeName +  " " + "Count: " + _count);
 								if (_m.getPlayer()==0) {
 									spymaster=true;
 									msg.setText("Spymaster View");
@@ -761,6 +786,7 @@ public class GUI extends JFrame implements ActionListener {
 								score.setText(_greenBoard.getRedCount() + " - " + _greenBoard.getBlueCount() + " - " 
 										+ _greenBoard.getGreenCount());
 								j.setEnabled(false);
+								message.setText("Clue: "+ codeName +  " " + "Count: " + _count);
 								if (_m.getPlayer()==0) {
 //									System.out.println(_m.getPlayer());
 									spymaster=true;
@@ -865,12 +891,14 @@ public class GUI extends JFrame implements ActionListener {
 					
 				}
 			}
+			
 			_cardPanel.add(cards);
 //			ADD ACTIONLISTENER
 			
 			
 			// HMMMMMMMMMMMMMMM????
 			updateJFrameIfNotHeadless();
+			
 		}
 	}
 

@@ -28,4 +28,31 @@ checks to see if a team has 			code.Board.Assassin				test.BoardTest.testAssassi
 revealed	 the assassin and											test.BoardTest.testAssassin1
 ends the game if revealed											test.BoardTest.testAssassin2
 
+										3 TEAM GAME
 
+checks to see of there are 			code.GreenBoard.randomNames		test.BoardTestGreen.testAssignmentGreen					
+the appropriate amount of 			code.GreenBoard.readFiles																								
+agents/civilians/assassins			code.GreenBoard.rboardLoctionsGreen
+on the board
+
+
+checks to see if the board			code.GreenBoard.winningStateGreen	test.BoardTestGreen.winningStateGreen
+is in one of the wining 																	
+states																	
+
+
+checks to see which team			code.GreenBoard.setAssassinCount	test.BoardTestGreen.testAssassinGreenRed
+won after the 2nd 					code.GreenBoard.Assassin			test.BoardTestGreen.testAssassinGreenBlue
+assassin has been														test.BoardTestGreen.testAssassinGreenGreen
+revealed
+
+
+checks to see who's					code.ManageTurns.setPlayer			test.BoardTestGreen.nextTurnTwoAssassins
+turn is next in all					code.ManageTurns.switchTurnGreen	test.BoardTestGreen.nextTurnOneAssassin
+situations							code.GreenBoard.setAssassinCount
+
+
+
+
+
+																	
